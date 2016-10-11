@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20161010191340) do
 
   create_table "employees", force: :cascade do |t|
-    t.string   "nome",                   limit: 255, default: "", null: false
+    t.string   "name",                   limit: 255, default: "", null: false
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
     t.string   "reset_password_token",   limit: 255
