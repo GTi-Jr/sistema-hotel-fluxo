@@ -6,6 +6,9 @@
 	<title>Gerenciamento de Produtos e Serviços - Hotel Porto Futuro</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+
 	<%= csrf_meta_tags %>
 	<!--  *= require plugins/kalendar/kalendar-->
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -22,7 +25,7 @@
   		<div id="nav">
   			<!--logo start-->
   			<div class="profile">
-  				<div class="logo"><a href="/"><img src="images/logo.png" alt=""></a></div>
+  				<div class="logo"><a href="/"><%= image_tag "logo.png" %></a></div>
   			</div>
   			<!--logo end--> 
   			<!--navigation start [MENU-EDITAR]-->
@@ -38,8 +41,10 @@
   				<li class="sub">
   					<a href="#"><i class="fa fa-user"></i><span>Usuários</span></a>
   					<ul class="navigation-sub">
-  						<li><a href="grids.html"><i class="fa fa fa-plus" ></i><span>Cadastrar</span></a></li>
-  						<li><a href="tab-accordions.html"><i class="fa fa-user"></i></i><span>Editar</span></a></li>
+  						<li><%= link_to new_admin_employee_path do %><i class="fa fa-plus" ></i><span>Cadastrar</span><% end -%>
+						</li>
+  						<li><%= link_to admin_employees_path do %><i class="fa fa-user" ></i><span>Editar</span><% end -%>
+						</li>
   					</ul>
   				</li>
   				<li><%= link_to destroy_employee_session_path,title: "Sair", method: :delete do %>
@@ -67,7 +72,7 @@
   					<ul class="user-info pull-right fadeInLeftBig animated">
   						<li class="profile-info dropdown"> 
 
-  							<a data-toggle="dropdown" class="dropdown-toggle" href="#"> <img class="img-circle" alt="" src="images/avatar.jpg"><%=current_employee.name%>  <b class="caret"></b></a>
+  							<a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0)"><%= image_tag "avatar.jpg", class: 'img-circle' %><%=current_employee.name%>  <b class="caret"></b></a>
   							<ul class="dropdown-menu">
   								<li class="caret"></li>
   								<li> <a href="#"> <i class="fa fa-user"></i> Editar Perfil </a> </li>
@@ -107,8 +112,7 @@
 
   </div>
   <!--layout-container end--> 
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-
+     <%= javascript_include_tag 'dependencias', 'data-turbolinks-track' => true %>
 
 
 </body>

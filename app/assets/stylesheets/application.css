@@ -8,6 +8,11 @@
   *= require css/cssfontegoogle
   *= require css/animate
 
+
+  *= require data-tables/DT_bootstrap
+  *= require advanced-datatable/css/demo_table
+  *= require advanced-datatable/css/demo_page
+  *= require advanced-datatable/css/buttons.dataTables.min
   
 
 
