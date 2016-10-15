@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  root 'dashboard#index'
+
+  namespace :admin do
+    resources :employees
+  end
+
+  
   devise_for :employees, controllers: {
     sessions: 'employees/sessions',
     confirmations: 'employees/confirmations',
