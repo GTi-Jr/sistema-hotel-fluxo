@@ -38,6 +38,7 @@
   						<li><a href="relatorio.html"><i class="fa fa-columns"></i></i><span>Gerar Relatório</span></a></li>
   					</ul>
   				</li>
+<<<<<<< HEAD
   				<li class="sub">
   					<a href="#"><i class="fa fa-user"></i><span>Usuários</span></a>
   					<ul class="navigation-sub">
@@ -47,6 +48,19 @@
 						</li>
   					</ul>
   				</li>
+=======
+          <%if current_employee && current_employee.admin?  %>
+    				<li class="sub">
+    					<a href="#"><i class="fa fa-user"></i><span>Usuários</span></a>
+    					<ul class="navigation-sub">
+    						<li><%= link_to new_admin_employee_path do %><i class="fa fa-plus" ></i><span>Cadastrar</span><% end -%>
+  						</li>
+    						<li><%= link_to admin_employees_path do %><i class="fa fa-user" ></i><span>Editar</span><% end -%>
+  						</li>
+    					</ul>
+    				</li>
+          <%end%>
+>>>>>>> ec4b2f04dde92105278872b84414294a670390b6
   				<li><%= link_to destroy_employee_session_path,title: "Sair", method: :delete do %>
   					<i class="fa fa-sign-out"></i><span>Sair</span>
   					<% end %>

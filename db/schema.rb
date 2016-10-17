@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161013143608) do
+ActiveRecord::Schema.define(version: 20161013231314) do
 
   create_table "departments", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20161013143608) do
     t.string   "code",                   limit: 255
     t.integer  "sector_id",              limit: 4
     t.integer  "department_id",          limit: 4
+    t.boolean  "admin"
   end
 
   add_index "employees", ["department_id"], name: "index_employees_on_department_id", using: :btree

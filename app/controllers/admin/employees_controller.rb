@@ -1,4 +1,5 @@
 class Admin::EmployeesController < Admin::BaseController
+  before_action :check_admin_rights
   before_action :set_admin_employee, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/employees
@@ -69,6 +70,8 @@ class Admin::EmployeesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_employee_params
-      params.require(:employee).permit(:name, :email, :password, :code, :sector_id, :department_id)
+
+      params.require(:employee).permit(:name, :email, :password, :code, :sector_id, :department_id,:admin)
+
     end
 end

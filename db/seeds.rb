@@ -5,4 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Employee.create(name: 'Admin GTI',email: 'admin@hotel.com', password: 'admin123')
+
+Sector.create(name: 'Todos')
+Sector.create(name: 'Portaria')
+Sector.create(name: 'Garçons')
+Department.create(name: 'Todos')
+Department.create(name: 'Cozinha')
+Department.create(name: 'Recepçao')
+Employee.create(name: 'Admin GTI',email: 'admin@hotel.com', password: 'admin123', sector_id: '1', department_id: '1',code: '123', admin:true)

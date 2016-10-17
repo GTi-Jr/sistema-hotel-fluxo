@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  root 'dashboard#index'
+
+
   namespace :admin do
     resources :employees
   end
