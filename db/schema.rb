@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161013231314) do
+ActiveRecord::Schema.define(version: 20161017201517) do
 
   create_table "departments", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -44,6 +44,20 @@ ActiveRecord::Schema.define(version: 20161013231314) do
   add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
   add_index "employees", ["sector_id"], name: "index_employees_on_sector_id", using: :btree
 
+  create_table "products", force: :cascade do |t|
+    t.integer  "code",          limit: 4
+    t.string   "name",          limit: 255
+    t.text     "description",   limit: 65535
+    t.float    "value",         limit: 24
+    t.integer  "sector_id",     limit: 4
+    t.integer  "department_id", limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "products", ["department_id"], name: "index_products_on_department_id", using: :btree
+  add_index "products", ["sector_id"], name: "index_products_on_sector_id", using: :btree
+
   create_table "sectors", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
@@ -52,4 +66,6 @@ ActiveRecord::Schema.define(version: 20161013231314) do
 
   add_foreign_key "employees", "departments"
   add_foreign_key "employees", "sectors"
+  add_foreign_key "products", "departments"
+  add_foreign_key "products", "sectors"
 end

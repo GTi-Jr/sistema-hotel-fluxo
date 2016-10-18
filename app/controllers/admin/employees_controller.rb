@@ -30,7 +30,7 @@ class Admin::EmployeesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_employee.save
-        format.html { redirect_to admin_employees_path, notice: 'Funcionário foi criado com sucesso.' }
+        format.html { redirect_to admin_employees_path, notice1: 'Funcionário foi criado com sucesso.' }
         format.json { render :show, status: :created, location: @admin_employee }
       else
         format.html { render :new }

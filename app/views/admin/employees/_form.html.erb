@@ -1,5 +1,5 @@
 
-<% if @admin_employee.errors.any? %>
+ <% if @admin_employee.errors.any? %>
   <script>
    $(document).ready(function() {
     noty({text: ' <%= pluralize(@admin_employee.errors.count, "erros") %> encontrados: </br><ul><% @admin_employee.errors.full_messages.each do |message| %><li><%= message %></li><% end %></ul>', layout: 'bottom', type: 'warning', timeout: 4000});
@@ -61,8 +61,6 @@
             </div>
           </div>
 
-<<<<<<< HEAD
-=======
           <div class="form-group lable-padd">
             <label class="col-sm-3">Administrador</label>
             <div class="col-sm-6">
@@ -70,7 +68,6 @@
             </div>
           </div>
 
->>>>>>> ec4b2f04dde92105278872b84414294a670390b6
           
           <p>&nbsp;</p>
           <div class="form-group">
