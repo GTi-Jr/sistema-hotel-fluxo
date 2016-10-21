@@ -5,8 +5,6 @@ class ProductController < Admin::BaseController
   	unless  code.nil?
   		redirect_to find_product_path(code)
   	end
-
-
   end
 
   def find
@@ -16,5 +14,12 @@ class ProductController < Admin::BaseController
     end
   end
 
-  
+  def search
+    @departments = Department.all
+    @histories = HistoryQuery.main_query(initial_date: params[:initial_date], 
+                                         end_date: params[:end_date],
+                                         type: params[:type],
+                                         code: params[:code],
+                                         department: params[:department])
+  end
 end

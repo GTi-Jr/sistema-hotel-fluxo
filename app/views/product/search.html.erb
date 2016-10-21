@@ -1,0 +1,118 @@
+<div class="row">
+   <!--col-md-12 start-->
+   <div class="col-md-12">
+      <div class="page-heading">
+         <h1>Lançamentos <small>Consultar Lançamentos</small></h1>
+      </div>
+   </div>
+   <!--col-md-12 end-->
+   <!--conteudo INCIAL -->
+   <!--col-md-12 start-->
+   <div class="col-md-12">
+      <div class="box-info">
+         <h3>Gerar Relatório</h3>
+         <hr>
+         <div class="panel">
+            <div class="panel-body">
+               <%= form_tag search_product_path, method: :get, class: 'form-horizontal' do %>
+                  <div class="form-group">
+                     <label class="col-lg-2 control-label">Período</label>
+                     <div class="col-lg-6">
+                        <div class="input-group input-large" data-date="13/07/2013" data-date-format="mm/dd/yyyy">
+                           <%= text_field_tag :initial_date, nil, class: 'form-control dpd1' %>
+                           <!-- <input type="text" class="form-control dpd1" name="from"> -->
+                           <span class="input-group-addon">Até</span>
+                           <%= text_field_tag :end_date, nil, class: 'form-control dpd2' %>
+                        </div>
+                     </div>
+                  </div>
+
+                   <div class="form-group">
+                     <label class="col-lg-2 control-label">Código</label>
+                     <div class="col-lg-6">
+                        <%= text_field_tag :code, nil, class: 'form-control' %>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label class="col-lg-2 control-label">Tipo</label>
+                     <div class="col-lg-6">
+                        <select class="form-control" id="source" name="type">
+                           <option value="0" />Todos
+                           <option value="1" />Entrada
+                           <option value="2" />Saída
+                        </select>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label class="col-lg-2 control-label">Departamento</label>
+                     <div class="col-lg-6">
+                        <%= select_tag :departments, @departments.map { |d| [d.id, d.name] }, class: 'form-control' %>
+                  
+                     </div>
+                  </div>
+
+
+                  <div class="form-group">
+                     <div class="col-lg-offset-2 col-lg-10">
+                        <button class="btn btn-success" type="button">Gerar Relatório</button>
+                        <button class="btn btn-default" type="button">Cancelar</button>
+                     </div>
+                  </div>
+               <% end %>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-md-12">
+      <!--box-info start-->
+      <div class="box-info">
+         <h4>09/10/2016 até 15/10/2016 </h4>
+         <hr>
+         <!--adv-table start-->
+         <div class="adv-table">
+            <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+               <thead>
+                  <tr>
+                     <th>ID</th>
+                     <th>PRODUTO</th>
+                     <th>USER</th>
+                     <th>DATA DE TRANSAÇÃO</th>
+                     <th>DATA DE LANÇAMENTO</th>
+                     <th>VALOR</th>
+                  </tr>
+               </thead>
+               <tfoot>
+                  <tr>
+                     <th colspan="5" style="text-align:right">Total:</th>
+                     <th></th>
+                  </tr>
+               </tfoot>
+               <tbody>
+                  <tr class="gradeX">
+                     <td>1</td>
+                     <td>COCA COLA1 </td>
+                     <td><a href="#" title="ver perfil">1224</a></td>
+                     <td>10/10/2016</td>
+                     <td>10/10/2016</td>
+                     <td>7.99</td>
+                  </tr>
+                  <tr class="gradeX">
+                     <td>2</td>
+                     <td>COCA COLA</td>
+                     <td><a href="#" title="ver perfil">1234</a></td>
+                     <td>10/10/2016</td>
+                     <td>10/10/2016</td>
+                     <td>6.99</td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+         <!--adv-table end-->
+      </div>
+      <!--box-info end-->
+   </div>
+   <!--col-md-12 end-->
+</div>
+<!--col-md-12 end-->
