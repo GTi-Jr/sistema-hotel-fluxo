@@ -1,66 +1,71 @@
  <div class="row">
   <div class="col-md-12">
    <div class="box-info">
-   <h3># <%= @product.name %></h3>
+   <h3># <%= @product.code %> - <%= @product.name %></h3>
       <hr>
       <div class="panel">
-         <div class="bio-graph-heading">Ingredientes: Água gaseíficada, açúcar, extrato de noz de cola, cafeína, corante caramelo IV, acidulante INS 338 e aroma natural.</br>NÃO CONTÉM GLÚTEN. (descrição)
-         </div>
+         <div class="bio-graph-heading"><%= @product.description %></div>
          <div class="panel-body bio-graph-info">
             <h1>Informações</h1>
             <div class="row">
                <div class="bio-row">
-                  <p><span>Valor </span>: R$ 6,99</p>
+                  <p><span>Valor </span>: R$ <%= @product.value %></p>
                </div>
                <div class="bio-row">
-                  <p><span>Funcionário</span>: Patrick Magalhães</p>
+                  <p><span>Funcionário</span>: <%=current_employee.name%></p>
                </div>
                <div class="bio-row">
-                  <p><span>Setor </span>: CAIXA</p>
+                  <p><span>Setor </span>: <%= @product.sector.name %></p>
                </div>
                <div class="bio-row">
-                  <p><span>Departamento </span>: RECEPÇÃO</p>
+                  <p><span>Departamento </span>: <%= @product.department.name %></p>
                </div>
             </div>
             <h1> Informações complementares </h1>
             <div class="panel-body">
                <form role="form" class="form-horizontal">
+               <% if @product.value == nil %>
                   <div class="form-group">
                      <label class="col-lg-2 control-label">Valor</label>
                      <div class="col-lg-6">
                       <div class="input-group"> <span class="input-group-addon">R$</span>
-                         <input type="text" class="form-control" />
+                         <input type="text" class="form-control" name="valor" id="valor" />
                       </div>
 
                    </div>
                 </div>
+                <% end %>
                 <div class="form-group">
                   <label class="col-lg-2 control-label">Data da transação</label>
                   <div class="col-lg-6">
-                     <input class="form-control form-control-inline input-medium default-date-picker"  size="16" type="text" value="" />
+                     <input class="form-control form-control-inline input-medium default-date-picker"  size="16" type="text" value="" id="data_trans" name="data_trans" />
 
                   </div>
                </div>
+               <% if @product.code == @product_hospedagem_code %>
                <div class="form-group">
                   <label class="col-lg-2 control-label">Código do Cliente</label>
                   <div class="col-lg-6">
-                     <input type="password" placeholder=" " id="rt-pwd" class="form-control">
+                     <input type="text" placeholder=" " id="cliente_codigo" class="form-control">
                   </div>
                </div>
+               <% end %>
                <div class="form-group">
                   <label class="col-lg-2 control-label">Quantidade</label>
                   <div class="col-lg-6">
-                     <input type="number"  min ="0" placeholder=" " id="rt-pwd" class="form-control">
+                     <input type="number" min ="0" placeholder=" " id="quantity" class="form-control" value="1">
                   </div>
                </div>
                <div class="form-group">
                   <div class="col-lg-offset-2 col-lg-10">
-                     <button class="btn btn-success" onclick="confirmacao('0');" type="button">Entrada</button>
-                     <button class="btn btn-danger" onclick="confirmacao('1');" type="button">Saída</button>
+                     <button class="btn btn-success" onclick="confirmation_transaction(0,'<%= @product.code %>');" type="button">Entrada</button>
+                     <button class="btn btn-danger" onclick="confirmation_transaction(1,'<%= @product.code %>');" type="button">Saída</button>
                   </div>
                </div>
             </form>
-         </div>
+            </div>
+            <div id="recebe_transaction"></div>
+
       </div>
    </div>
 </div>

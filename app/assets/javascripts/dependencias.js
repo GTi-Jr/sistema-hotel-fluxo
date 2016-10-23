@@ -23,15 +23,57 @@
 //= require js/layouts/top
 //= require js/master
 
-
-
-//= require js/global
+//= require bootstrap-datepicker/js/bootstrap-datepicker
  
 
 
-
-
-
 //= require turbolinks
+
+/* PAG: LISTAR PRODUTOS */
+$(document).ready(function() {
+	$('.default-date-picker').datepicker({
+       format: 'dd/mm/yyyy'
+    });
+});
+
+ function confirmation_transaction(tipo, code) {
+ 	var value = $('#valor').val();
+	var data_trans = $('#data_trans').val();
+ 	var client_code = $('#cliente_codigo').val();
+ 	var quantity = $('#quantity').val();
+
+
+ 	var type = tipo ? 'SAÍDA' : 'ENTRADA';
+ 	var text = '<span class="fa fa-exclamation-triangle" style="float:left; margin:0 7px 20px 0;"></span><b>Atenção:</b> Voçê confirma a '+type+' do produto de código #'+code+'?</br>';
+ 	text += '<b>Quantidade: </b> '+quantity+' - <b>Valor Total:</b> R$ '+(quantity*value)+'';
+
+ 	$.confirm({
+    	title: type+' de um produto/serviço',
+        message: text,
+        buttons: {
+        	'Confirmar': {
+            	'class': 'yes',
+            	'action': function() {
+             		$.ajax({
+             			url: '/product/transaction',
+             			data: {'code':code,'quantity':quantity,'type':type,'data_trans':data_trans,'client_code':client_code,'value':value},
+             			type: 'post',
+             			success: function(html){
+             				$('#recebe_transaction').html(html);
+             			},
+             			error: function(erro){
+
+             				console.log(erro);
+             			}
+             		});
+             	}
+            },
+            'Cancelar': {
+                'class': 'no',
+                'action': function() {}
+            }
+        }
+    });
+ }
 
 

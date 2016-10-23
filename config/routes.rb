@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     get 'product/:code', to: 'product#find', as: :find_product
     get 'product' => 'product#index'
     get 'products/search' => 'product#search', as: :search_product
+    post 'product/transaction' => 'product#transaction', as: :transaction
   end
 
   unauthenticated :employee do

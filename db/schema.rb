@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161017201517) do
+ActiveRecord::Schema.define(version: 20161022030533) do
 
   create_table "departments", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -64,8 +64,27 @@ ActiveRecord::Schema.define(version: 20161017201517) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "transactions", force: :cascade do |t|
+    t.boolean  "type"
+    t.integer  "payment_method", limit: 4
+    t.string   "client_code",    limit: 255
+    t.integer  "department_id",  limit: 4
+    t.integer  "sector_id",      limit: 4
+    t.decimal  "price",                      precision: 8, scale: 2, default: 0.0
+    t.integer  "product_id",     limit: 4
+    t.datetime "created_at",                                                       null: false
+    t.datetime "updated_at",                                                       null: false
+  end
+
+  add_index "transactions", ["department_id"], name: "index_transactions_on_department_id", using: :btree
+  add_index "transactions", ["product_id"], name: "index_transactions_on_product_id", using: :btree
+  add_index "transactions", ["sector_id"], name: "index_transactions_on_sector_id", using: :btree
+
   add_foreign_key "employees", "departments"
   add_foreign_key "employees", "sectors"
   add_foreign_key "products", "departments"
   add_foreign_key "products", "sectors"
+  add_foreign_key "transactions", "departments"
+  add_foreign_key "transactions", "products"
+  add_foreign_key "transactions", "sectors"
 end

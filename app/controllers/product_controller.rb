@@ -12,6 +12,8 @@ class ProductController < Admin::BaseController
     if @product.nil?
       redirect_to product_path, alert: 'Produto não encontrado.'
     end
+    #RETORNAR CODIGO DO SERVIÇO HOSPEDAGEM
+    @product_hospedagem_code = Product.find_by(name: 'Hospedagem').code
   end
 
   def search
@@ -22,4 +24,10 @@ class ProductController < Admin::BaseController
                                          code: params[:code],
                                          department: params[:department])
   end
+
+  def transaction
+     @params_transaction = params[:code]
+     render '/product/transaction', layout: false
+  end
+
 end

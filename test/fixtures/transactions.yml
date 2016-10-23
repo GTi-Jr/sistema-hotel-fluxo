@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2016-10-21
+  time: 2016-10-21 23:55:06
+  type: false
+  payment_method: 1
+  client_code: MyString
+  department_id: 
+  sector_id: 
+
+two:
+  date: 2016-10-21
+  time: 2016-10-21 23:55:06
+  type: false
+  payment_method: 1
+  client_code: MyString
+  department_id: 
+  sector_id: 
