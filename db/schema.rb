@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20161022030533) do
+=======
+ActiveRecord::Schema.define(version: 20161023181425) do
+>>>>>>> 7608653ee7643325238a8e3ebfd1f87da5bbf812
 
   create_table "departments", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -65,6 +69,7 @@ ActiveRecord::Schema.define(version: 20161022030533) do
   end
 
   create_table "transactions", force: :cascade do |t|
+<<<<<<< HEAD
     t.boolean  "type"
     t.integer  "payment_method", limit: 4
     t.string   "client_code",    limit: 255
@@ -80,6 +85,21 @@ ActiveRecord::Schema.define(version: 20161022030533) do
   add_index "transactions", ["product_id"], name: "index_transactions_on_product_id", using: :btree
   add_index "transactions", ["sector_id"], name: "index_transactions_on_sector_id", using: :btree
 
+=======
+    t.date     "date"
+    t.time     "time"
+    t.integer  "type",           limit: 4
+    t.integer  "payment_method", limit: 4
+    t.string   "client_code",    limit: 255
+    t.integer  "department_id",  limit: 4
+    t.integer  "employee_id",    limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "product_id",     limit: 4
+    t.integer  "quantity",       limit: 4
+  end
+
+>>>>>>> 7608653ee7643325238a8e3ebfd1f87da5bbf812
   add_foreign_key "employees", "departments"
   add_foreign_key "employees", "sectors"
   add_foreign_key "products", "departments"

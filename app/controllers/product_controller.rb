@@ -16,6 +16,7 @@ class ProductController < Admin::BaseController
     @product_hospedagem_code = Product.find_by(name: 'Hospedagem').code
   end
 
+
   def search
     @departments = Department.all
     @histories = HistoryQuery.main_query(initial_date: params[:initial_date], 
@@ -29,5 +30,6 @@ class ProductController < Admin::BaseController
      @params_transaction = params[:code]
      render '/product/transaction', layout: false
   end
+
 
 end

@@ -1,8 +1,7 @@
-class TransactionQuery < ActiveRecord::Base
+class Transaction < ActiveRecord::Base
+  belongs_to :product
 
-  def self.main_query(options = {})
-    options[:initiald_date]
+  def value
+    quantity * product.value
   end
-
-  
 end

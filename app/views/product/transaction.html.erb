@@ -1,7 +1,7 @@
 <h1> Adicionado com Sucesso - <%= params[:type] %></h1>
 
 Você cadastrou <%= params[:quantity] %> produto(s) de código #<%= params[:code] %> como uma <%= params[:type] %>.<br>
-O valor total foi de R$ <%= params[:value].to_f * params[:quantity].to_f %>.
+O valor total foi de R$ <%= params[:value].to_f * params[:quantity].to_f %>
 Ainda é possível desfazer esta inclusão. Caso queira, clique no botão ao lado:
 
 <button class="btn btn-success" type="button">DESFAZER <%= params[:type] %></button>

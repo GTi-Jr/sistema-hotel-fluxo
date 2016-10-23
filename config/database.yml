@@ -27,7 +27,7 @@ development:
 test:
   <<: *default
   username: root
-  password: gtijr
+  password: 123456
   database: hotel_test
 
 # As with config/secrets.yml, you never want to store sensitive information,

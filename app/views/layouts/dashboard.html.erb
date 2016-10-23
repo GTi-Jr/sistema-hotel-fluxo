@@ -36,7 +36,7 @@
   					<ul class="navigation-sub">
               <li><%= link_to product_path do %><i class="fa fa-plus-square-o" ></i><span>Identificar</span><% end -%>
               </li>
-              <li><a href="relatorio.html"><i class="fa fa-columns"></i></i><span>Gerar Relatório</span></a></li>
+              <li><%= link_to search_product_path do %><i class="fa fa-columns"></i></i><span>Gerar Relatório</span><% end -%></li>
             </ul>
           </li>
           <%if current_employee && current_employee.admin?  %>
