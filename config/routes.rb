@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'transactions/search'
+
   namespace :admin do
     resources :employees
   end
@@ -26,7 +28,7 @@ Rails.application.routes.draw do
 
     get 'product/:code', to: 'product#find', as: :find_product
     get 'product' => 'product#index'
-    get 'products/search' => 'product#search', as: :search_product
+    get 'transactions/search' => 'transactions#search', as: :search_product
   end
 
   unauthenticated :employee do

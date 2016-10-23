@@ -56,8 +56,8 @@
 
                   <div class="form-group">
                      <div class="col-lg-offset-2 col-lg-10">
-                        <button class="btn btn-success" type="button">Gerar Relatório</button>
-                        <button class="btn btn-default" type="button">Cancelar</button>
+                        <%= submit_tag "Gerar Relatório", class:"btn btn-success" %>
+                        <%= button_tag "Cancelar", type: :reset, class:"btn btn-default" %>
                      </div>
                   </div>
                <% end %>
@@ -68,47 +68,47 @@
    <div class="col-md-12">
       <!--box-info start-->
       <div class="box-info">
-         <h4>09/10/2016 até 15/10/2016 </h4>
+         <% if @initial_date && @end_date %>
+            <h4><%= @initial_date %> até <%= @end_date %></h4>
+         <% end %>
          <hr>
-         <!--adv-table start-->
-         <div class="adv-table">
-            <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
-               <thead>
-                  <tr>
-                     <th>ID</th>
-                     <th>PRODUTO</th>
-                     <th>USER</th>
-                     <th>DATA DE TRANSAÇÃO</th>
-                     <th>DATA DE LANÇAMENTO</th>
-                     <th>VALOR</th>
-                  </tr>
-               </thead>
-               <tfoot>
-                  <tr>
-                     <th colspan="5" style="text-align:right">Total:</th>
-                     <th></th>
-                  </tr>
-               </tfoot>
-               <tbody>
-                  <tr class="gradeX">
-                     <td>1</td>
-                     <td>COCA COLA1 </td>
-                     <td><a href="#" title="ver perfil">1224</a></td>
-                     <td>10/10/2016</td>
-                     <td>10/10/2016</td>
-                     <td>7.99</td>
-                  </tr>
-                  <tr class="gradeX">
-                     <td>2</td>
-                     <td>COCA COLA</td>
-                     <td><a href="#" title="ver perfil">1234</a></td>
-                     <td>10/10/2016</td>
-                     <td>10/10/2016</td>
-                     <td>6.99</td>
-                  </tr>
-               </tbody>
-            </table>
-         </div>
+         <% if @transactions.empty? %>
+            <h1>Nada encontrado</h1>
+         <% else %>
+            <!--adv-table start-->
+            <div class="adv-table">
+               <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+                  <thead>
+                     <tr>
+                        <th>ID</th>
+                        <th>PRODUTO</th>
+                        <th>USER</th>
+                        <th>DATA DE TRANSAÇÃO</th>
+                        <th>DATA DE LANÇAMENTO</th>
+                        <th>VALOR</th>
+                     </tr>
+                  </thead>
+                  <tfoot>
+                     <tr>
+                        <th colspan="5" style="text-align:right">Total:</th>
+                        <th></th>
+                     </tr>
+                  </tfoot>
+                  <tbody>
+                     <% @transactions.each do |transaction| %>
+                        <tr class="gradeX">
+                           <td><%= transaction.id %></td>
+                           <td><%= transaction.product.name %></td>
+                           <td><%= transaction.employee.name %></td>
+                           <td><%= transaction.date %></td>
+                           <td><%= transaction.created_at %></td>
+                           <td><%= transaction.value %></td>
+                        </tr>
+                     <% end %>
+                  </tbody>
+               </table>
+            </div>
+         <% end %>
          <!--adv-table end-->
       </div>
       <!--box-info end-->
