@@ -1,6 +1,6 @@
 
 # Change these
-server '45.55.172.126', port: 22, roles: [:web, :app, :db], primary: true
+
 
 set :repo_url,        'git@github.com:GTi-Jr/sistema-hotel-fluxo.git'
 set :application,     'sistema-hotel-fluxo'
