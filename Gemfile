@@ -50,8 +50,8 @@ group :development do
 
   gem 'capistrano'
   gem 'capistrano-rvm'
-  gem 'capistrano-rails'
-  gem 'capistrano-bundler'
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
   gem 'capistrano3-puma'
 
 
