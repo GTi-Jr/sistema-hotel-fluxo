@@ -4,14 +4,10 @@ require "capistrano/setup"
 # Include default deployment tasks
 require "capistrano/deploy"
 
-
+require 'capistrano/rails'
 require 'capistrano/bundler'
 require 'capistrano/rvm'
-require 'capistrano/rails/assets' # for asset handling add
-require 'capistrano/rails/migrations' # for running migrations
 require 'capistrano/puma'
-require 'capistrano/rails/console'
-# Include tasks from other gems included in your Gemfile
 #
 # For documentation on these, see for example:
 #
