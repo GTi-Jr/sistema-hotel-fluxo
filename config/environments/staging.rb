@@ -77,7 +77,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  ction_Mailer::Base.smtp_settings = {
+  Action_Mailer::Base.smtp_settings = {
     :address              => 'smtp.sendgrid.net',
     :port                 => 587,
     :domain               => 'rubysnack.com',
@@ -86,4 +86,8 @@ Rails.application.configure do
     :authentication       => :plain,
     :enable_starttls_auto => true
   }
+
+  config.middleware.insert_before(::Rack::Runtime, "::Rack::Auth::Basic", "Staging") do |u,p|
+    u == ENV["STAGING_USERNAME"] && p == ENV["STAGING_PASSWORD"]
+  end
 end

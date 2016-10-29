@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'dashboard#index'
+  get 'transactions/search'
 
   namespace :admin do
     resources :employees
@@ -25,11 +25,15 @@ Rails.application.routes.draw do
   } , skip: [:registrations]
   
   authenticated :employee do
-    root 'dashboard#index', as: :authenticated_employee_root
+
+    get 'product/:code', to: 'product#find', as: :find_product
+    get 'product' => 'product#index'
+    get 'transactions/search' => 'transactions#search', as: :search_product
   end
 
   unauthenticated :employee do
-    root 'dashboard#index',  as: :unauthenticated_employee_root
+   
   end
+  root 'dashboard#index'
 
 end

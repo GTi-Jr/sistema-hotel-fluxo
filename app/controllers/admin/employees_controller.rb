@@ -30,7 +30,7 @@ class Admin::EmployeesController < Admin::BaseController
 
     respond_to do |format|
       if @admin_employee.save
-        format.html { redirect_to admin_employees_path, notice: 'Funcionário foi criado com sucesso.' }
+        format.html { redirect_to admin_employees_path, notice1: 'Funcionário foi criado com sucesso.' }
         format.json { render :show, status: :created, location: @admin_employee }
       else
         format.html { render :new }
@@ -70,6 +70,8 @@ class Admin::EmployeesController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_employee_params
+
       params.require(:employee).permit(:name, :email, :password, :code, :sector_id, :department_id,:admin)
+
     end
 end

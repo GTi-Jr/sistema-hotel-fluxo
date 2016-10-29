@@ -1,5 +1,5 @@
 
-<% if @admin_employee.errors.any? %>
+ <% if @admin_employee.errors.any? %>
   <script>
    $(document).ready(function() {
     noty({text: ' <%= pluralize(@admin_employee.errors.count, "erros") %> encontrados: </br><ul><% @admin_employee.errors.full_messages.each do |message| %><li><%= message %></li><% end %></ul>', layout: 'bottom', type: 'warning', timeout: 4000});
