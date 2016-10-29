@@ -18,7 +18,7 @@ default: &default
 development:
   <<: *default
   username: root
-  password: 123456
+  password: 
   database: hotel_development
 
 # Warning: The database defined as "test" will be erased and
@@ -27,7 +27,7 @@ development:
 test:
   <<: *default
   username: root
-  password: 123456
+  password: 
   database: hotel_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
@@ -52,5 +52,11 @@ test:
 production:
   <<: *default
   database: hotel_production
-  username: hotel
+  username: deploy
+  password: <%= ENV['HOTEL_DATABASE_PASSWORD'] %>
+
+staging:
+  <<: *default
+  database: hotel_staging
+  username: deploy
   password: <%= ENV['HOTEL_DATABASE_PASSWORD'] %>
