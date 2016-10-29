@@ -28,7 +28,7 @@ set :ssh_options,     { forward_agent: false, user: fetch(:user), keys: %w(~/.ss
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true  # Change to false when not using ActiveRecord
-set :bundle_dir, "/usr/local/rvm/gems/ruby-2.2.3-3p173"
+set :bundle_flags, '--deployment'
 
 
 
