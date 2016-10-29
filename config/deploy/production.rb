@@ -15,7 +15,6 @@ set :ssh_options, {
 
   forward_agent: false,
   #:verbose => :debug
-
 }
 
 
