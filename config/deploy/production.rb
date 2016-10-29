@@ -4,7 +4,7 @@
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
-server '45.55.172.126', roles: [:web, :app, :db], primary: true
+server '45.55.172.126', user: 'deploy', roles: [:web, :app, :db], primary: true
 
 # Extended Server Syntax
 # ======================
