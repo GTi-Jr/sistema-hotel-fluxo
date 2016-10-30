@@ -32,6 +32,9 @@ set :puma_workers, 0
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true
 set :puma_preload_app, false
+set :use_sudo,        false
+set :stage,           :production
+set :deploy_via,      :remote_cache
 
 
 namespace :deploy do
