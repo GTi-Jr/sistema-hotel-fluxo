@@ -15,6 +15,12 @@ set :puma_workers,    0
 
 # Don't change these unless you know what you're doing
 set :pty,             true
+set :linked_files, %w{config/database.yml config/application.yml}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
+set :keep_releases, 5
+set :rvm_type, :user
+#set :rvm_version, '1.27.0'
+set :rvm_ruby, '1.0.0' # Edit this if you are using MRI Ruby
 set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :remote_cache
@@ -30,6 +36,7 @@ set :puma_worker_timeout, nil
 set :puma_init_active_record, true  # Change to false when not using ActiveRecord
 set :bundle_flags, '--deployment'
 set :format, :pretty
+
 
 
 namespace :deploy do
