@@ -1,0 +1,17 @@
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'login-form-signin'}) do |f| %>
+<div class="login-logo"><img src="images/logo.png"></div>
+<h2 class="login-form-signin-heading">HOTEL PORTO FUTURO</h2>
+<div class="login-wrap">
+   <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: 'Email' %>
+   <%= f.password_field :password, autocomplete: "off", class: "form-control",placeholder: 'Senha' %>
+   <label class="checkbox">
+   <% if devise_mapping.rememberable? -%>
+   <input type="checkbox" value="remember-me"> Lembre-me
+   <% end -%>
+   <span class="pull-right">
+   <%= render "employees/shared/links" %>
+   </span>
+   </label>
+   <button type="submit" class="btn btn-lg btn-primary btn-block">Logar</button>
+</div>
+<% end %>

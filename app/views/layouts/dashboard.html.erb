@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<title>Gerenciamento de Produtos e Serviços - Hotel Porto Futuro</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<%= stylesheet_link_tag  'dashboard', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'nottyandjquery', 'data-turbolinks-track' => true %>
+
+  <%= csrf_meta_tags %>
+  <!--  *= require plugins/kalendar/kalendar-->
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  	<!--layout-container start-->
+  	<div id="layout-container"> 
+  		<!--Left navbar start-->
+  		<div id="nav">
+  			<!--logo start-->
+  			<div class="profile">
+  				<div class="logo"><a href="/"><%= image_tag "logo.png" %></a></div>
+  			</div>
+  			<!--logo end--> 
+  			<!--navigation start [MENU-EDITAR]-->
+  			<ul class="navigation">
+  				<li><a class="active" href="/"><i class="fa fa-home"></i><span>Dashboard</span></a></li>
+  				<li class="sub">
+  					<a href="#"><i class="fa fa-barcode"></i><span>Lançamentos</span></a>
+  					<ul class="navigation-sub">
+              <li><%= link_to product_path do %><i class="fa fa-plus-square-o" ></i><span>Identificar</span><% end -%>
+              </li>
+              <li><%= link_to search_product_path do %><i class="fa fa-columns"></i></i><span>Gerar Relatório</span><% end -%></li>
+            </ul>
+          </li>
+          <%if current_employee && current_employee.admin?  %>
+          <li class="sub">
+           <a href="#"><i class="fa fa-user"></i><span>Usuários</span></a>
+           <ul class="navigation-sub">
+            <li><%= link_to new_admin_employee_path do %><i class="fa fa-plus" ></i><span>Cadastrar</span><% end -%>
+            </li>
+            <li><%= link_to admin_employees_path do %><i class="fa fa-user" ></i><span>Editar</span><% end -%>
+            </li>
+          </ul>
+          </li>
+        <%end%>
+
+        <li><%= link_to destroy_employee_session_path,title: "Sair", method: :delete do %>
+         <i class="fa fa-sign-out"></i><span>Sair</span><% end -%>
+       </li>
+
+
+ 
+   </ul>
+   <!--navigation end--> 
+ </div>
+ <!--Left navbar end--> 
+
+ <!--main start-->
+ <div id="main">
+  <div class="head-title">
+   <div class="menu-switch"><i class="fa fa-bars"></i></div>
+   <!--row start-->
+   <div class="row"> 
+    <!--col-md-12 start-->
+    <div class="col-md-12"> 
+     <div class="text-logo">Hotel<span style="font-weight: bold; color: #ea2c46"> Porto Futuro</span></div>
+     <!--profile dropdown start-->
+     <ul class="user-info pull-right fadeInLeftBig animated">
+      <li class="profile-info dropdown"> 
+
+       <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0)"><%= image_tag "avatar.jpg", class: 'img-circle' %><%=current_employee.name%>  <b class="caret"></b></a>
+       <ul class="dropdown-menu">
+        <li class="caret"></li>
+        <!--<li> <a href="#"> <i class="fa fa-user"></i> Editar Perfil </a> </li>-->
+        <li> <%= link_to destroy_employee_session_path,title: "Sair", method: :delete do %>
+         <i class="fa fa-clipboard"></i> Sair <%end %> </li>
+       </ul>
+     </li>
+   </ul><!--profile dropdown end-->       
+ </div>
+ <!--col-md-12 end--> 
+</div>
+<!--row end--> 
+</div>
+
+<!--margin-container start-->
+<div class="margin-container"> 
+  <!--scrollable wrapper start-->
+  <div class="scrollable wrapper"> 
+   <!--row start e conteudo-->
+   <% unless alert.nil? %>
+   <script>
+     $(document).ready(function() {
+      noty({text: ' <%= alert %>', layout: 'bottom', type: 'warning', timeout: 4000});
+    });
+  </script>
+  <% end %>
+   <% unless notice.nil? %>
+   <script>
+     $(document).ready(function() {
+      noty({text: ' <%= notice %>', layout: 'bottom', type: 'success', timeout: 4000});
+    });
+  </script>
+  <% end %>
+  <%= yield %>
+  <!--row e conteudo fim -->
+</div>
+</div>
+<footer>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <!-- Copyright info -->
+     <p class="copy">Copyright &copy; 2016 | <a href="http://www.hotelportofuturo.com.br/" target="_blank">Hotel Porto Futuro</a> </p>
+   </div>
+ </div>
+</div>
+</footer>   
+</div>
+</div>
+<!--main end-->
+
+</div>
+<!--layout-container end--> 
+<%= javascript_include_tag 'dashboard', 'data-turbolinks-track' => true %>
+
+
+</body>
+</html>

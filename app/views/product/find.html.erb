@@ -1,0 +1,74 @@
+ <div class="row">
+  <div class="col-md-12">
+   <div class="box-info">
+   <h3># <%= @product.code %> - <%= @product.name %></h3>
+      <hr>
+      <div class="panel">
+      <% unless @product.description.blank? %>
+         <div class="bio-graph-heading"><%= @product.description %></div>
+      <% end %>
+         <div class="panel-body bio-graph-info">
+            <h1>Informações</h1>
+            <div class="row">
+               <div class="bio-row">
+                  <p><span>Valor </span>: R$ <%= @product.price %></p>
+               </div>
+               <div class="bio-row">
+                  <p><span>Funcionário</span>: <%=current_employee.name%></p>
+               </div>
+               <div class="bio-row">
+                  <p><span>Setor </span>: <%= @product.sector.name %></p>
+               </div>
+               <div class="bio-row">
+                  <p><span>Departamento </span>: <%= @product.department.name %></p>
+               </div>
+            </div>
+            <h1> Informações complementares </h1>
+            <div class="panel-body">
+               <form role="form" class="form-horizontal">
+               <% if @product.price == nil %>
+                  <div class="form-group">
+                     <label class="col-lg-2 control-label">Valor*</label>
+                     <div class="col-lg-6">
+                      <div class="input-group"> <span class="input-group-addon">R$</span>
+                         <input type="number" class="form-control" name="valor" id="valor" />
+                      </div>
+
+                   </div>
+                </div>
+                <% end %>
+                <div class="form-group">
+                  <label class="col-lg-2 control-label">Data da transação</label>
+                  <div class="col-lg-6">
+
+                  <input type="text" class="form-control form-control-inline input-medium" value="<%= Time.now.strftime("%d/%m/%Y") %>" name="data_trans" id="data_trans" />
+
+                  </div>
+               </div>
+               <% if @product.code == @product_hospedagem_code %>
+               <div class="form-group">
+                  <label class="col-lg-2 control-label">Código do Cliente*</label>
+                  <div class="col-lg-6">
+                     <input type="text" placeholder=" " name="cliente_codigo" id="cliente_codigo" class="form-control">
+                  </div>
+               </div>
+               <% end %>
+               <div class="form-group">
+                  <label class="col-lg-2 control-label">Quantidade</label>
+                  <div class="col-lg-6">
+                     <input type="number" min ="0" placeholder=" " name="quantity" id="quantity" class="form-control" value="1">
+                  </div>
+               </div>
+               <div class="form-group">
+                  <div class="col-lg-offset-2 col-lg-10">
+                     <button class="btn btn-success" onclick="confirmation_transaction(0,'<%= @product.code %>','<%= @product.price %>');" type="button">Entrada</button>
+                     <button class="btn btn-danger" onclick="confirmation_transaction(1,'<%= @product.code %>','<%= @product.price %>');" type="button">Saída</button>
+                  </div>
+               </div>
+            </form>
+            </div>
+            <div id="recebe_transaction"></div>
+      </div>
+   </div>
+</div>
+</div>

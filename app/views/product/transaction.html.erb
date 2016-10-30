@@ -1,0 +1,19 @@
+<%
+#ARRUMAR ISSO
+if params[:type].to_i == 0
+ 	tipo = "ENTRADA"
+else
+	tipo ="SAÍDA"
+end
+%>
+<h1> Adicionado com Sucesso - <%= tipo %> <%= @id_create %></h1>
+
+Você cadastrou <b><%= params[:quantity] %></b> produto(s) de código <b>#<%= params[:code] %></b> como uma <b><%= tipo %></b>.<br>
+O valor total foi de <b>R$ <%= params[:value].to_f * params[:quantity].to_f %></b>.
+Ainda é possível desfazer esta inclusão. Caso queira, clique no botão ao lado:
+
+
+ <%= link_to ('<button class="btn btn-success"><i class="fa fa-times"></i> DESFAZER '+ tipo + '</button>').html_safe, transaction_desfazer_path(@id_create), method: :post, data: { confirm: 'Você tem certeza?' } %>
+
+<%#= debug params %>
+                

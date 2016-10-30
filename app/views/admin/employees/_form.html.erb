@@ -1,0 +1,80 @@
+ <% if @admin_employee.errors.any? %>
+  <script>
+   $(document).ready(function() {
+    noty({text: ' <%= pluralize(@admin_employee.errors.count, "erros") %> encontrados: </br><ul><% @admin_employee.errors.full_messages.each do |message| %><li><%= message %></li><% end %></ul>', layout: 'bottom', type: 'warning', timeout: 4000});
+  });
+  </script>
+<% end %>
+
+
+ <%= form_for [:admin, @admin_employee], html: {:class=>'form-horizontal row-border', 'data-validate' => 'parsley', 'autocomplete'=>'off' }  do |f| %>
+
+
+
+        <div class="col-md-6">
+          <div class="form-group lable-padd">
+            <label class="col-sm-3">Nome</label>
+            <div class="col-sm-6">
+               <%= f.text_field :name, class: 'form-control parsley-validated', placeholder: 'Nome Completo', autocomplete: 'off' %>
+            </div>
+          </div>
+
+          <div class="form-group lable-padd">
+            <label class="col-sm-3">Senha</label>
+            <div class="col-sm-6">
+              <%= f.password_field :password, class: 'form-control parsley-validated', placeholder: 'Senha', autocomplete: 'off' %>
+            </div>
+          </div>
+
+          <div class="form-group lable-padd">
+            <label class="col-sm-3">Departamento</label>
+            <div class="col-sm-6">
+              <%= f.collection_select(:department_id, Department.all, :id, :name, {}, {:class=>'form-control'})%>
+            </div>
+          </div>
+          
+          
+          
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group lable-padd">
+            <label class="col-sm-3">Email</label>
+            <div class="col-sm-6">
+              <%= f.text_field :email, class: 'form-control parsley-validated', placeholder: 'Email address', 'data-type'=> 'email', autocomplete: 'off' %>
+            </div>
+          </div>
+
+
+          <div class="form-group lable-padd">
+            <label class="col-sm-3">Código</label>
+            <div class="col-sm-6">
+               <%= f.text_field :code, class: 'form-control parsley-validated', placeholder: 'Código do funcionário', autocomplete: 'off' %>
+            </div>
+          </div>
+
+          <div class="form-group lable-padd">
+            <label class="col-sm-3">Setor</label>
+            <div class="col-sm-6">
+              <%= f.collection_select(:sector_id, Sector.all, :id, :name, {}, {:class=>'form-control'})%>
+            </div>
+          </div>
+
+          <div class="form-group lable-padd">
+            <label class="col-sm-3">Administrador</label>
+            <div class="col-sm-6">
+              <%= f.check_box :admin, {}, true%>
+            </div>
+          </div>
+
+          
+          <p>&nbsp;</p>
+          <div class="form-group">
+            <div class="col-lg-offset-6 col-lg-10">
+              <button class="btn-danger btn">Salvar</button>
+     
+              <%= link_to '<button class="btn-default btn">Cancelar</button>'.html_safe, admin_employees_path %>
+
+            </div>
+          </div>
+       <% end %>
