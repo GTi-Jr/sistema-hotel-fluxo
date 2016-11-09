@@ -2,14 +2,15 @@ class TransactionController < BaseController
 
 
 	def save
-		@transaction = Transaction.main_query(code: params[:code], 
+		@transaction = Transaction.main_query(
+		  code: params[:code],
 			quantity: params[:quantity],
 			type_t: params[:type],
 			data_trans: params[:data_trans],
 			client_code: params[:client_code],
 			value: params[:value],
 			employee: current_employee.id
-			)
+		)
 
 		if @transaction[:status] == true
 			@id_create = @transaction[:message]
@@ -24,7 +25,7 @@ class TransactionController < BaseController
 
   end
 
-  def destroy 
+  def destroy
   	transaction_d = Transaction.find(params[:id]).update(status_t: 0)
   	redirect_to product_path, notice: 'Feito! Você desfez a sua última ação.'
   end
@@ -34,13 +35,14 @@ class TransactionController < BaseController
   	@departments = Department.all
   	@initial_date = params[:initial_date]
   	@end_date = params[:end_date]
-  	@transactions = HistoryQuery.main_query(initial_date: params[:initial_date], 
+  	@transactions = HistoryQuery.main_query(
+			date_range: params[:date_range],
   		end_date: params[:end_date],
-  		type: params[:type],
+  		type_t: params[:type],
   		code: params[:code],
-  		department: params[:department])
+  		department: params[:department]
+		)
   end
 
 
 end
-

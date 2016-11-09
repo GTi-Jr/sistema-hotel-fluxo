@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161024173057) do
+ActiveRecord::Schema.define(version: 20161109030159) do
 
   create_table "departments", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(version: 20161024173057) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.boolean  "type_t"
     t.integer  "payment_method", limit: 4
     t.integer  "quantity",       limit: 4
     t.string   "client_code",    limit: 255
@@ -76,6 +75,7 @@ ActiveRecord::Schema.define(version: 20161024173057) do
     t.integer  "product_code",   limit: 4
     t.datetime "created_at",                                                        null: false
     t.datetime "updated_at",                                                        null: false
+    t.integer  "type_t",         limit: 4
   end
 
   add_index "transactions", ["employee_id"], name: "index_transactions_on_employee_id", using: :btree

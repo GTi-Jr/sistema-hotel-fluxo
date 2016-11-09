@@ -2,8 +2,9 @@ class Transaction < ActiveRecord::Base
   belongs_to :product, foreign_key: 'product_code', primary_key: 'code'
   belongs_to :employee
 
-  def self.main_query(options = {})
+  enum type_t: { sale: 0, purchase: 1 }
 
+  def self.main_query(options = {})
       #VERIFICAR SE É HOSPEDAGEM
       product_hospedagem_code = Product.find_by(name: 'Hospedagem').code
       if product_hospedagem_code==options[:code].to_i
@@ -12,7 +13,6 @@ class Transaction < ActiveRecord::Base
         return {status: false, message: "Parece que você não preencheu alguns campos obrigatórios."}
       end
     end
-
 
     #salvar dados
     @transaction_new = Transaction.new(type_t: options[:type_t],
