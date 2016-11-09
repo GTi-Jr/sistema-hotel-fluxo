@@ -5,17 +5,20 @@ RSpec.describe HistoryQuery, :type => :model do
     product = Product.create!(code: 555)
     transaction = Transaction.create!(product: product)
 
-    expect(HistoryQuery.main_query(code: 555).first).to eq(Transaction.first)
+    expect(HistoryQuery.main_query(code: 555).first.product_code).to eq(product.code)
   end
 
   it 'should search by date' do
-    product_1 = Transaction.create!(product_code: 111, data_t: Date.yesterday)
-    product_2 = Transaction.create!(product_code: 222, data_t: Date.yesterday.yesterday)
-    product_3 = Transaction.create!(product_code: 333, data_t: Date.tomorrow)
-    product_4 = Transaction.create!(product_code: 444, data_t: Date.today)
+    transactions = []
+    transactions << product_1 = Transaction.create!(product_code: 111, data_t: Time.zone.now.to_date.yesterday)
+    transactions << product_2 = Transaction.create!(product_code: 222, data_t: Time.zone.now.to_date.yesterday.yesterday)
+    transactions << product_3 = Transaction.create!(product_code: 333, data_t: Time.zone.now.to_date.tomorrow)
+    transactions << product_4 = Transaction.create!(product_code: 444, data_t: Time.zone.now.to_date)
+    transactions << product_5 = Transaction.create!(product_code: 555, data_t: Time.zone.now.to_date)
 
-    range_1 = "#{Date.yesterday.strftime('%d/%m/%Y')} - #{Date.today.strftime('%d/%m/%Y')}"
+    range_1 = "#{Time.zone.now.to_date.yesterday.strftime('%d/%m/%Y')} - #{Time.zone.now.to_date.strftime('%d/%m/%Y')}"
 
-    expect(HistoryQuery.main_query(date_range: range_1).order(:product_code).to_a).to eq([product_1, product_3])
+    expect(Transaction.where(data_t: (Time.zone.now.to_date)..(Time.zone.now.to_date.tomorrow)).order(:product_code).to_a).to eq([product_3, product_4, product_5])
+    expect(HistoryQuery.main_query(date_range: range_1).order(:product_code).to_a).to eq([product_1, product_4, product_5])
   end
 end
