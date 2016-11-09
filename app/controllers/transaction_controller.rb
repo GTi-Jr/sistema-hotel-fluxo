@@ -40,7 +40,7 @@ class TransactionController < BaseController
   		end_date: params[:end_date],
   		type_t: params[:type],
   		code: params[:code],
-  		department: params[:department]
+  		department_id: params[:department]
 		)
   end
 

@@ -17,11 +17,10 @@ class HistoryQuery
     when :all
     when :sale     then @transactions = transactions.where(type_t: 0) # 0 sale
     when :purchase then @transactions = transactions.where(type_t: 1) # 1 purchase
-    # Caso seja todos, nao entrará em nenhum case e pegará todos
     end
 
-    if options[:department].present?
-      @transactions = transactions.where(department_id: options[:department])
+    if options[:department_id].present?
+      @transactions = transactions.includes(:product).where(products: { department_id: options[:department_id] } )
     end
 
     p @transactions.to_sql
