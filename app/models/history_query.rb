@@ -23,8 +23,6 @@ class HistoryQuery
       @transactions = transactions.includes(:product).where(products: { department_id: options[:department_id] } )
     end
 
-    p @transactions.to_sql
-
     @transactions || Transaction.none
   end
 
