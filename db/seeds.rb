@@ -15,3 +15,7 @@ Department.create(name: 'Cozinha')
 Department.create(name: 'Recepçao')
 Product.create(name: 'Hospedagem', code: '555', sector_id: '1', department_id: '1')
 Employee.create(name: 'Admin GTI',email: 'admin@hotel.com', password: 'admin123', sector_id: '1', department_id: '1',code: '123', admin:true)
+
+
+
+Product.create(name: 'Coca-Cola 2L', code: '123', sector_id: '1', department_id: '1', price: '6.99')

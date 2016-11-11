@@ -43,6 +43,7 @@ function confirmation_transaction(tipo, code,price) {
 
 
  	var type = tipo ? 'SAÍDA' : 'ENTRADA';
+    var type_enum = tipo ? 'sale' : 'purchase';
  	var text = '<span class="fa fa-exclamation-triangle" style="float:left; margin:0 7px 20px 0;"></span><b>Atenção:</b> Voçê confirma a '+type+' do produto de código #'+code+'?</br>';
  	text += '<b>Quantidade: </b> '+quantity+' - <b>Valor Total:</b> R$ '+(quantity*value)+'';
 
@@ -55,7 +56,7 @@ function confirmation_transaction(tipo, code,price) {
             	'action': function() {
              		$.ajax({
              			url: '/product/transaction',
-             			data: {'code':code,'quantity':quantity,'type':tipo,'data_trans':data_trans,'client_code':client_code,'value':value},
+             			data: {'code':code,'quantity':quantity,'type':type_enum,'data_trans':data_trans,'client_code':client_code,'value':value},
              			type: 'post',
              			success: function(html){
              				$('#recebe_transaction').html(html);

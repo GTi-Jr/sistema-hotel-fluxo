@@ -94,8 +94,8 @@
                            <td><%= transaction.id %></td>
                            <td><%= transaction.product.name %></td>
                            <td><%= transaction.employee.name %></td>
-                           <td><%= transaction.data_t %></td>
-                           <td><%= transaction.created_at %></td>
+                           <td><%= transaction.data_t.strftime("%d/%m/%Y")%></td>
+                           <td><%= transaction.created_at.strftime("%d/%m/%Y %H:%M") %></td>
                            <td><%= transaction.price %></td>
                         </tr>
                      <% end %>
