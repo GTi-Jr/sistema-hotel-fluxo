@@ -14,14 +14,16 @@ class TransactionController < BaseController
 
 		if @transaction[:status] == true
 			@id_create = @transaction[:message]
-			render '/product/transaction' , layout: false
+			#render '/product/transaction' , layout: false
+			render html: "tudo_ok".html_safe
 		else
+
 			render html: "<script>
 			noty({text: ' #{@transaction[:message]}', layout: 'bottom', type: 'warning', timeout: 4000});
 			</script>".html_safe
 
-      	#render js: "noty({text: ' #{@transaction}', layout: 'bottom', type: 'warning', timeout: 4000});"
-      end
+      	
+      	end
 
   end
 

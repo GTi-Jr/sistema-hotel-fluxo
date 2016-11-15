@@ -10,9 +10,12 @@ class Transaction < ActiveRecord::Base
       if product_hospedagem_code==options[:code].to_i
           #verifica sem o campo code_client e price não está vazio
           if options[:client_code].blank? || options[:value].blank?
+            return {status: false, message: "Parece que você não preencheu alguns campos obrigatórios."}
+          end
+      end
+      if options[:code].blank?
         return {status: false, message: "Parece que você não preencheu alguns campos obrigatórios."}
       end
-    end
 
     #salvar dados
     @transaction_new = Transaction.new(type_t: options[:type_t],

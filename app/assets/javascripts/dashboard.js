@@ -18,58 +18,7 @@
 
 
 //= require turbolinks
-
-
-
 //= require js/global
-
-
-function confirmation_transaction(tipo, code,price) {
-
-	 var data_trans = $('#data_trans').val();
-    /*CONVERTER DATA */ 
-    var convertDate = function(usDate) {
-        var dateParts = usDate.split(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
-        return dateParts[3] + "-" + dateParts[2] + "-" + dateParts[1];
-    }
-    data_trans = convertDate(data_trans);
-
-
- 	var type = tipo ? 'SAÍDA' : 'ENTRADA';
-
-  var type_enum = tipo ? 'sale' : 'purchase';
- 	var text = '<span class="fa fa-exclamation-triangle" style="float:left; margin:0 7px 20px 0;"></span><b>Atenção:</b> Voçê confirma a '+type+' do produto de código #'+code+'?</br>';
- 	text += '<b>Quantidade: </b> '+quantity+' - <b>Valor Total:</b> R$ '+(quantity*value)+'';
-
- 	$.confirm({
-    	title: type+' de um produto/serviço',
-        message: text,
-        buttons: {
-        	'Confirmar': {
-            	'class': 'yes',
-            	'action': function() {
-             		$.ajax({
-             			url: '/product/transaction',
-             			data: {'code':code,'quantity':quantity,'type':type_enum,'data_trans':data_trans,'client_code':client_code,'value':value},
-             			type: 'post',
-             			success: function(html){
-             				$('#recebe_transaction').html(html);
-             			},
-             			error: function(erro){
-             				$('#recebe_transaction').html("OPS! ERRO AO CADASTRAR.");
-             				console.log(erro);
-             			}
-             		});
-             	}
-            },
-            'Cancelar': {
-                'class': 'no',
-                'action': function() {}
-            }
-        }
-    });
- }
-
 
  /*==RANGE DATE PICKER MAXFLE 06/12/13 ==*/
  $(function() {
@@ -115,6 +64,7 @@ function confirmation_transaction(tipo, code,price) {
 
 
 function confirmation_transaction_new(type,user_name){
+  /* BUSCAR DADOS */
   var client_code = $('#cliente_codigo').val();
   var quantity = $('#quantity').val();
   var product_code = $('#product_code').val();
@@ -122,35 +72,78 @@ function confirmation_transaction_new(type,user_name){
   var value_prod = $('#value_prod').val();
   var name_prod = $('#name_prod').val();
 
-  /*LOAD TABLE */
-  var newRow = $('<tr class="gradeX">');
-  var cols = "";
-  cols += '<td>'+product_code+'</td>';
-  cols += '<td>'+name_prod+'</td>';
-  cols += '<td>'+user_name+'</td>';
-  cols += '<td>'+data_trans+'</td>';
-  cols += '<td>'+parseFloat(value_prod)*parseFloat(quantity)+'</td>';
-  cols += '<td>'+quantity+'</td>';
-  cols += '<td>'+type+'</td>';
-  cols += '<td>TEXTO</td>';
+  /*CONVERTER DATA */ 
+  var convertDate = function(usDate) {
+      var dateParts = usDate.split(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+      return dateParts[3] + "-" + dateParts[2] + "-" + dateParts[1];
+  }
+  data_trans_n = convertDate(data_trans);
 
-  newRow.append(cols);
+  var type_text = type=='sale' ? 'VENDA' : 'COMPRA'; // APENAS PARA A ALERTA
+  var text = '<span class="fa fa-exclamation-triangle" style="float:left; margin:0 7px 20px 0;"></span><b>Atenção:</b> Voçê confirma a '+type_text+' do produto de código #'+product_code+'?</br>';
+  text += '<b>Quantidade: </b> '+quantity+' - <b>Valor Total:</b> R$ '+(quantity*value_prod)+'';
 
-  $("#anteriores_table").prepend(newRow);
-  /* ZERAR */
-  $('#cliente_codigo').val("");
-  $('#quantity').val("");
-  $('#product_code').val("");
-  $('#value_prod').val("");
-  $('#name_prod').val("");
-  
+  $.confirm({
+      title: type_text+' de um produto/serviço',
+        message: text,
+        buttons: {
+          'Confirmar': {
+              'class': 'yes',
+              'action': function() {
+                $.ajax({
+                  url: '/product/transaction',
+                  data: {'code':product_code,'quantity':quantity,'type':type,'data_trans':data_trans_n,'client_code':client_code,'value':value_prod},
+                  type: 'post',
+                  success: function(html){
+                    if(html==='tudo_ok'){
+                        /* ZERAR */
+                      $('#cliente_codigo').val("");
+                      $('#quantity').val("");
+                      $('#product_code').val("");
+                      $('#value_prod').val("");
+                      $('#name_prod').val("");
+
+                        /*LOAD TABLE */
+                      var newRow = $('<tr class="gradeX">');
+                      var cols = "";
+                      cols += '<td>'+product_code+'</td>';
+                      cols += '<td>'+name_prod+'</td>';
+                      cols += '<td>'+user_name+'</td>';
+                      cols += '<td>'+data_trans+'</td>';
+                      cols += '<td>'+parseFloat(value_prod)*parseFloat(quantity)+'</td>';
+                      cols += '<td>'+quantity+'</td>';
+                      cols += '<td>'+type_text+'</td>';
+                      cols += '<td>TEXTO</td>';
+
+                      newRow.append(cols);
+                      $("#anteriores_table").prepend(newRow);
+                      $('#botao_confirmar').prop('disabled', true);
+
+                      }
+                      $("#recebe_transaction").html(html);
+                  },
+                  error: function(erro){
+                    $('#recebe_transaction').html("OPS! ERRO AO CADASTRAR.");
+                    console.log(erro);
+                  }
+                });
+              }
+            },
+            'Cancelar': {
+                'class': 'no',
+                'action': function() {}
+            }
+        }
+    });
+
 }
 
 
 /* Auto suggest CODE_PRODUCT*/   
 function suggest(inputString) {
-    if (inputString.length == 0) {
+    if (inputString.trim().length == "") {
         $('#suggestions').fadeOut();
+        $('#botao_confirmar').prop('disabled', true);
     } else {
         $('#product_code ').addClass('load');
         $.post("/product/suggestion", {queryString: "" + inputString + ""}, function(data) {
@@ -179,4 +172,10 @@ function fill(thisValue,price,name) {
     }
     $('#name_prod').val(name);
     $('#quantity').val(1);
+    if(thisValue!== undefined){
+      $('#botao_confirmar').prop('disabled', false);
+     } else {
+      $('#botao_confirmar').prop('disabled', true);
+     }
+
 }

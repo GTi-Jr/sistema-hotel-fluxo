@@ -38,9 +38,10 @@
          <hr>
          <div class="row">
             <div class="col-md-2">
-               <button class="btn-primary btn" type='reset' onclick="confirmation_transaction_new('<%= @type %>','<%=current_employee.name%>');" >Confirmar</button>
+               <button class="btn-primary btn" disabled="true" id="botao_confirmar"  onclick="confirmation_transaction_new('<%= @type %>','<%=current_employee.name%>');">Confirmar</button>
             </div>
          </div>
+         <div id="recebe_transaction" hidden=""></div>
       </div>
    </div>
 </div>
@@ -71,7 +72,7 @@
                      <td>texto</td>
                      <td>R$ 50.00</td>
                      <td>3</td>
-                     <td>venda</td>
+                     <td>VENDA</td>
                      <td>BOTÃO</td>
                   </tr>
                </tbody>
