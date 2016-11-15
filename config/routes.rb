@@ -19,7 +19,10 @@ Rails.application.routes.draw do
 
   authenticated :employee do
     get 'product' => 'product#index'
-    get 'product/:code', to: 'product#find', as: :find_product
+    get 'product/type/:type' => 'product#find', as: :type_product
+    post 'product/suggestion' => 'product#suggestion'
+    
+
 
     post 'product/transaction' => 'transaction#save', as: :transaction
     post 'product/transaction/:id' => 'transaction#destroy', as: :transaction_desfazer

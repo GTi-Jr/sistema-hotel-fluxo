@@ -118,3 +118,60 @@ function confirmation_transaction(tipo, code,price) {
 
 
 });
+
+
+function confirmation_transaction_new(type,user_name){
+  var client_code = $('#cliente_codigo').val();
+  var quantity = $('#quantity').val();
+  var product_code = $('#product_code').val();
+  var data_trans = $('#data_trans').val();
+  var value_prod = $('#value_prod').val();
+
+  /*AJAX PARA CARREGAR NOME DO PRODUTO */
+
+
+  /*LOAD TABLE */
+  var newRow = $('<tr class="gradeX">');
+  var cols = "";
+  cols += '<td>'+product_code+'</td>';
+  cols += '<td>nome do produto</td>';
+  cols += '<td>'+user_name+'</td>';
+  cols += '<td>'+data_trans+'</td>';
+  cols += '<td>'+parseFloat(value_prod)*parseFloat(quantity)+'</td>';
+  cols += '<td>'+quantity+'</td>';
+  cols += '<td>'+type+'</td>';
+  cols += '<td>TEXTO</td>';
+
+  newRow.append(cols);
+
+  $("#anteriores_table").prepend(newRow);
+  /* ZERAR */
+  $('#cliente_codigo').val("");
+  $('#quantity').val("");
+  $('#product_code').val("");
+  $('#value_prod').val("");
+
+
+}
+
+
+/* Auto suggest CODE_PRODUCT*/   
+function suggest(inputString) {
+    if (inputString.length == 0) {
+        $('#suggestions').fadeOut();
+    } else {
+        $('#product_code ').addClass('load');
+        $.post("/product/suggestion", {queryString: "" + inputString + ""}, function(data) {
+            if (data.length > 0) {
+                $('#suggestions').fadeIn();
+                $('#suggestionsList').html(data);
+                $('#product_code').removeClass('load');
+            }
+        });
+    }
+}
+
+function fill(thisValue) {
+    $('#product_code').val(thisValue);
+    setTimeout("$('#suggestions').fadeOut();", 600);
+}

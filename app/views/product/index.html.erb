@@ -11,21 +11,11 @@
    <!--col-md-12 start-->
    <div class="col-md-12">
       <div class="box-info">
-         <h3>Entre com o código do produto</h3>
-         <hr>
-         <%= form_tag(product_path, method: "get",class: "form-horizontal row-border") do %>
-            <div class="form-group lable-padd">
-               <label class="col-md-3" for="">CÓDIGO</label>
-               <div class="col-md-6">
-                  <input type="text" name="code" class="form-control" required="true">
-               </div>
-            </div>
-            <div class="form-group lable-padd">
-               <div class="col-md-6 col-sm-offset-3">
-                  <button class="btn-primary btn">Pesquisar</button>
-               </div>
-            </div>
-         <% end %>
+         <h3>Selecione o Tipo</h3>
+         <div class="col-md-6">
+         <%= link_to ('<button class="btn-primary btn col-md-4">Venda</button>').html_safe, type_product_path('sale')%>
+            <%= link_to ('<button class="btn-primary btn col-md-4">Compra</button>').html_safe, type_product_path('purchase')%>
+         </div>
       </div>
    </div>
 </div>

@@ -9,14 +9,21 @@ class ProductController < BaseController
   end
 
   def find
-    if @product.nil?
-      redirect_to product_path, alert: 'Produto não encontrado.'
+    @type = params[:type]
+
+    if @type!='sale' &&  @type!='purchase'
+      redirect_to product_path, alert: 'Tipo de lançamento não encontrado.'
     end
+
     #RETORNAR CODIGO DO SERVIÇO HOSPEDAGEM
     @product_hospedagem_code = Product.find_by(name: 'Hospedagem').code
   end
 
-  
+  def suggestion
+    render html: '<ul id="ulSugest"><li onClick="fill(\'teste\');">teste</li></ul>'.html_safe
+  end
+
+
   private
     def set_product_type
       @product = Product.find_by(code: params[:code])
