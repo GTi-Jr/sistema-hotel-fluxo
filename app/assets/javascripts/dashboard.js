@@ -25,12 +25,8 @@
 
 
 function confirmation_transaction(tipo, code,price) {
-	if(price==""){
- 		var value = $('#valor').val();
- 	} else {
- 		var value = price;
- 	}
-	var data_trans = $('#data_trans').val();
+
+	 var data_trans = $('#data_trans').val();
     /*CONVERTER DATA */ 
     var convertDate = function(usDate) {
         var dateParts = usDate.split(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
@@ -38,12 +34,10 @@ function confirmation_transaction(tipo, code,price) {
     }
     data_trans = convertDate(data_trans);
 
- 	var client_code = $('#cliente_codigo').val();
- 	var quantity = $('#quantity').val();
-
 
  	var type = tipo ? 'SAÍDA' : 'ENTRADA';
-    var type_enum = tipo ? 'sale' : 'purchase';
+
+  var type_enum = tipo ? 'sale' : 'purchase';
  	var text = '<span class="fa fa-exclamation-triangle" style="float:left; margin:0 7px 20px 0;"></span><b>Atenção:</b> Voçê confirma a '+type+' do produto de código #'+code+'?</br>';
  	text += '<b>Quantidade: </b> '+quantity+' - <b>Valor Total:</b> R$ '+(quantity*value)+'';
 
@@ -126,15 +120,13 @@ function confirmation_transaction_new(type,user_name){
   var product_code = $('#product_code').val();
   var data_trans = $('#data_trans').val();
   var value_prod = $('#value_prod').val();
-
-  /*AJAX PARA CARREGAR NOME DO PRODUTO */
-
+  var name_prod = $('#name_prod').val();
 
   /*LOAD TABLE */
   var newRow = $('<tr class="gradeX">');
   var cols = "";
   cols += '<td>'+product_code+'</td>';
-  cols += '<td>nome do produto</td>';
+  cols += '<td>'+name_prod+'</td>';
   cols += '<td>'+user_name+'</td>';
   cols += '<td>'+data_trans+'</td>';
   cols += '<td>'+parseFloat(value_prod)*parseFloat(quantity)+'</td>';
@@ -150,8 +142,8 @@ function confirmation_transaction_new(type,user_name){
   $('#quantity').val("");
   $('#product_code').val("");
   $('#value_prod').val("");
-
-
+  $('#name_prod').val("");
+  
 }
 
 
@@ -171,7 +163,20 @@ function suggest(inputString) {
     }
 }
 
-function fill(thisValue) {
+function fill(thisValue,price,name) {
     $('#product_code').val(thisValue);
     setTimeout("$('#suggestions').fadeOut();", 600);
+    if(price===''){
+      $('#value_prod').prop('disabled', false);
+    } else {
+      $('#value_prod').prop('disabled', true);
+      $('#value_prod').val(price);
+    }
+    if(thisValue==555){
+      $('#cliente_codigo').prop('disabled', false);
+    } else {
+      $('#cliente_codigo').prop('disabled', true);
+    }
+    $('#name_prod').val(name);
+    $('#quantity').val(1);
 }

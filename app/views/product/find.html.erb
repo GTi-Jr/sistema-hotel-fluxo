@@ -11,75 +11,72 @@
    <div class="col-md-12">
       <div class="box-info">
          <h3>Informe os dados do Produto [<%= @type=='sale' ? 'Venda' : 'Compra' %>]</h3>
-         <div class="col-md-2">
-
-
-            <input type="text" size="25" value="" id="product_code" onkeyup="suggest(this.value);" onblur="fill();" class="form-control" placeholder="Nome ou código do produto"  required="required" autocomplete="off" />
-
-            <div class="suggestionsBox" id="suggestions" style="display: none;"> <img src="../../images/arrow.png" style="position: relative; top: -12px; left: 30px;" alt="upArrow" />
-                                        <div class="suggestionList" id="suggestionsList"> &nbsp; </div>
-                                    </div>
-
-
+         <div class="row">
+            <div class="col-md-2">
+               <input type="text" size="25" id="product_code" onkeyup="suggest(this.value);" onblur="fill();" class="form-control" placeholder="Nome ou código do produto"  required="required" autocomplete="off" />
+               <div class="suggestionsBox" id="suggestions" style="display: none;">
+                  <img src="../../images/arrow.png" style="position: relative; top: -12px; left: 30px;" alt="upArrow" />
+                  <div class="suggestionList" id="suggestionsList"></div>
+               </div>
+            </div>
+            <div class="col-md-2">
+               <input type="text" name="" id="name_prod" class="form-control" placeholder="Nome do Produto" disabled="">
+            </div>
+            <div class="col-md-2">
+               <input type="text" name="" id="value_prod" class="form-control" placeholder="Valor R$" disabled="">
+            </div>
+            <div class="col-md-2">
+               <input type="number" placeholder="Quantidade" name="" id="quantity" class="form-control">
+            </div>
+            <div class="col-md-2">
+               <input type="number" placeholder="Code Cliente" name="" id="cliente_codigo" class="form-control" disabled="">
+            </div>
+            <div class="col-md-2">
+               <input type="text" class="form-control form-control-inline input-medium" value="<%= Time.now.strftime("%d/%m/%Y") %>" name="data_trans" id="data_trans" />
+            </div>
          </div>
-         <div class="col-md-2">
-           <input type="text" name="" id="value_prod" class="form-control" placeholder="Valor R$">
-         </div>
-         <div class="col-md-2">
-           <input type="number" placeholder="Quantidade" name="" id="quantity" class="form-control">
-         </div>
-         <div class="col-md-2">
-           <input type="number" placeholder="Code Cliente" name="" id="cliente_codigo" class="form-control">
-         </div>
-         <div class="col-md-2">
-            <input type="text" class="form-control form-control-inline input-medium" value="<%= Time.now.strftime("%d/%m/%Y") %>" name="data_trans" id="data_trans" />
-         </div>
-         <div class="col-md-2">
-           <button class="btn-primary btn" type='reset' onclick="confirmation_transaction_new('<%= @type %>','<%=current_employee.name%>');" >Confirmar</button>
-
+         <hr>
+         <div class="row">
+            <div class="col-md-2">
+               <button class="btn-primary btn" type='reset' onclick="confirmation_transaction_new('<%= @type %>','<%=current_employee.name%>');" >Confirmar</button>
+            </div>
          </div>
       </div>
    </div>
 </div>
-
 <div class="row">
-  <div class="col-md-12">
-    <div class="box-info">
-      <h3>Transações Anteriores</h3>
-      <hr>
-      <div class="adv-table">
-               <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" id="anteriores_table">
-
-                  <thead>
-                     <tr>
-                        <th>CODE</th>
-                        <th>PRODUTO</th>
-                        <th>USER</th>
-                        <th>DATA DE TRANSAÇÃO</th>
-                        <th>VALOR TOTAL</th>
-                        <th>QUANTIDADE</th>
-                        <th>TIPO</th>
-                        <th>DESFAZER</th>
-                     </tr>
-                  </thead>
-                 
-                  <tbody>
-
-                        <tr class="gradeX">
-                           <td>1</td>
-                           <td>texto</td>
-                           <td>texto</td>
-                           <td>texto</td>
-                           <td>R$ 50.00</td>
-                           <td>3</td>
-                           <td>venda</td>
-                           <td>BOTÃO</td>
-                        </tr>
-
-                  </tbody>
-               </table>
-            </div>
-
-    </div>
-  </div>
+   <div class="col-md-12">
+      <div class="box-info">
+         <h3>Transações Anteriores</h3>
+         <hr>
+         <div class="adv-table">
+            <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" id="anteriores_table">
+               <thead>
+                  <tr>
+                     <th>CODE</th>
+                     <th>PRODUTO</th>
+                     <th>USER</th>
+                     <th>DATA DE TRANSAÇÃO</th>
+                     <th>VALOR TOTAL</th>
+                     <th>QUANTIDADE</th>
+                     <th>TIPO</th>
+                     <th>DESFAZER</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr class="gradeX">
+                     <td>1</td>
+                     <td>texto</td>
+                     <td>texto</td>
+                     <td>texto</td>
+                     <td>R$ 50.00</td>
+                     <td>3</td>
+                     <td>venda</td>
+                     <td>BOTÃO</td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
 </div>

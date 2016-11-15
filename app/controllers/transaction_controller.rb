@@ -3,7 +3,7 @@ class TransactionController < BaseController
 
 	def save
 		@transaction = Transaction.main_query(
-		  code: params[:code],
+		 	code: params[:code],
 			quantity: params[:quantity],
 			type_t: params[:type],
 			data_trans: params[:data_trans],
