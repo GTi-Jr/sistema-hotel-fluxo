@@ -20,7 +20,11 @@ class ProductController < BaseController
   end
 
   def suggestion
-    render html: '<ul id="ulSugest"><li onClick="fill(\'teste\');">teste</li></ul>'.html_safe
+
+
+    @product_suggestion = Suggestion.main_query(queryString: params[:queryString])
+
+    render html: ('<ul id="ulSugest"><li onClick="fill(\'teste\');">'+params[:queryString] +'</li></ul>').html_safe
   end
 
 
