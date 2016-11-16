@@ -105,7 +105,7 @@ function confirmation_transaction_new(type, user_name) {
     var data_trans = $('#data_trans').val();
     var value_prod = $('#value_prod').val();
     var name_prod = $('#name_prod').val();
-    var sent = false; //PREVINIR 2 CLICK
+    var sent = false; //PREVENIR 2 CLICK
     /*CONVERTER DATA */
     var convertDate = function(usDate) {
         var dateParts = usDate.split(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
