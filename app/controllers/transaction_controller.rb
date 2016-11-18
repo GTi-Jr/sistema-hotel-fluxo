@@ -1,6 +1,4 @@
 class TransactionController < BaseController
-
-
 	def save
 		@transaction = Transaction.main_query(
 		 	code: params[:code],
@@ -17,21 +15,16 @@ class TransactionController < BaseController
 			#render '/product/transaction' , layout: false
 			render html: "tudo_ok".html_safe
 		else
-
 			render html: "<script>
 			noty({text: ' #{@transaction[:message]}', layout: 'bottom', type: 'warning', timeout: 4000});
-			</script>".html_safe
-
-      	
-      	end
-
+			</script>".html_safe  	
+    end
   end
 
   def destroy
   	transaction_d = Transaction.find(params[:id]).update(status_t: 0)
   	redirect_to product_path, notice: 'Feito! Você desfez a sua última ação.'
   end
-
 
   def search
   	@departments = Department.all
@@ -46,5 +39,12 @@ class TransactionController < BaseController
 		)
   end
 
-
+  def undo_last
+    if Transaction.last.status_t ==  'undone'
+      redirect_to :back, alert: 'Última transação já foi desfeita!'
+    else
+      Transaction.undo_last
+      redirect_to :back, notice: 'Você desfez o último lançamento!'
+    end
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161109030159) do
+ActiveRecord::Schema.define(version: 20161118035905) do
 
   create_table "departments", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -48,11 +48,11 @@ ActiveRecord::Schema.define(version: 20161109030159) do
     t.integer  "code",          limit: 4
     t.string   "name",          limit: 255
     t.text     "description",   limit: 65535
-    t.decimal  "price",                       precision: 8, scale: 2
     t.integer  "sector_id",     limit: 4
     t.integer  "department_id", limit: 4
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.float    "price",         limit: 24
   end
 
   add_index "products", ["department_id"], name: "index_products_on_department_id", using: :btree
@@ -67,15 +67,15 @@ ActiveRecord::Schema.define(version: 20161109030159) do
   create_table "transactions", force: :cascade do |t|
     t.integer  "payment_method", limit: 4
     t.integer  "quantity",       limit: 4
-    t.integer  "client_code",    limit: 4
+    t.string   "client_code",    limit: 255
     t.date     "data_t"
     t.integer  "employee_id",    limit: 4
-    t.boolean  "status_t",                                         default: true
-    t.decimal  "price",                    precision: 8, scale: 2, default: 0.0
+    t.boolean  "status_t",                   default: true
     t.integer  "product_code",   limit: 4
-    t.datetime "created_at",                                                      null: false
-    t.datetime "updated_at",                                                      null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.integer  "type_t",         limit: 4
+    t.float    "price",          limit: 24
   end
 
   add_index "transactions", ["employee_id"], name: "index_transactions_on_employee_id", using: :btree

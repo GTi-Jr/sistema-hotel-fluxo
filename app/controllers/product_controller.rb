@@ -17,6 +17,7 @@ class ProductController < BaseController
 
     #RETORNAR CODIGO DO SERVIÇO HOSPEDAGEM
     @product_hospedagem_code = Product.find_by(name: 'Hospedagem').code
+    @transactions = Transaction.where.not(status_t: :undone).order('data_t DESC, id DESC').paginate(page: params[:page], per_page: 10)
   end
 
   def suggestion

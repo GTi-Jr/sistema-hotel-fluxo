@@ -32,13 +32,15 @@
                <input type="number" placeholder="Code Cliente" name="" id="cliente_codigo" class="form-control" disabled="">
             </div>
             <div class="col-md-2">
-               <input type="text" class="form-control form-control-inline input-medium" value="<%= Time.now.strftime("%d/%m/%Y") %>" name="data_trans" id="data_trans" />
+               <input type="text" class="form-control form-control-inline input-medium" placeholder="Data de Transação" name="data_trans" id="data_trans" />
+               <%= label_tag :data_trans, 'Data de Transação', class: 'text-center' %>
             </div>
          </div>
          <hr>
          <div class="row">
-            <div class="col-md-2">
+            <div class="col-xs-12">
                <button class="btn-primary btn" disabled="true" id="botao_confirmar"  onclick="confirmation_transaction_new('<%= @type %>','<%=current_employee.name%>');">Confirmar</button>
+               <%= link_to 'Desfazer último lançamento', undo_last_transaction_path, method: :put, class:'btn-danger btn', confirm: { data: 'Certeza que deseja desfazer o último lançamento?'} %>
             </div>
          </div>
          <div id="recebe_transaction" hidden=""></div>
@@ -51,6 +53,9 @@
          <h3>Transações Anteriores</h3>
          <hr>
          <div class="adv-table">
+            <div class="digg_pagination">
+               <%= will_paginate @transactions, :container => false %>
+            </div>
             <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" id="anteriores_table">
                <thead>
                   <tr>
@@ -61,22 +66,25 @@
                      <th>VALOR TOTAL</th>
                      <th>QUANTIDADE</th>
                      <th>TIPO</th>
-                     <th>DESFAZER</th>
                   </tr>
                </thead>
                <tbody>
-                  <tr class="gradeX">
-                     <td>1</td>
-                     <td>texto</td>
-                     <td>texto</td>
-                     <td>texto</td>
-                     <td>R$ 50.00</td>
-                     <td>3</td>
-                     <td>VENDA</td>
-                     <td>BOTÃO</td>
-                  </tr>
+                  <% @transactions.each do |transaction| %>
+                     <tr class="gradeX">
+                        <td><%= transaction.product_code %></td>
+                        <td><%= transaction.product.name %></td>
+                        <td><%= transaction.employee.name %></td>
+                        <td><%= transaction.data_t.strftime("%d/%m/%Y") %></td>
+                        <td><%= transaction.price %></td>
+                        <td><%= transaction.quantity %></td>
+                        <td><%= Transaction.human_enum_name(:type_t, transaction.type_t) %></td>
+                     </tr>
+                  <% end %>
                </tbody>
             </table>
+            <div class="digg_pagination">
+               <%= will_paginate @transactions, :container => false %>
+            </div>
          </div>
       </div>
    </div>

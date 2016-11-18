@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 #MANUAL
 gem 'devise'
 
+gem 'will_paginate', '~> 3.1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'

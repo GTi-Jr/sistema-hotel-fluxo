@@ -113,7 +113,7 @@ function confirmation_transaction_new(type, user_name) {
     }
     data_trans_n = convertDate(data_trans);
 
-    var type_text = type == 'sale' ? 'VENDA' : 'COMPRA'; // APENAS PARA A ALERTA
+    var type_text = type == 'sale' ? 'Venda' : 'Compra'; // APENAS PARA A ALERTA
     var text = '<span class="fa fa-exclamation-triangle" style="float:left; margin:0 7px 20px 0;"></span><b>Atenção:</b> Voçê confirma a ' + type_text + ' do produto de código #' + product_code + '?</br>';
     text += '<b>Quantidade: </b> ' + quantity + ' - <b>Valor Total:</b> R$ ' + (quantity * value_prod) + '';
 
@@ -156,7 +156,6 @@ function confirmation_transaction_new(type, user_name) {
                                 cols += '<td>' + parseFloat(value_prod) * parseFloat(quantity) + '</td>';
                                 cols += '<td>' + quantity + '</td>';
                                 cols += '<td>' + type_text + '</td>';
-                                cols += '<td>TEXTO</td>';
 
                                 newRow.append(cols);
                                 $("#anteriores_table").prepend(newRow);
