@@ -6,6 +6,8 @@ class Transaction < ApplicationRecord
 
   enum type_t: { sale: 0, purchase: 1 }
   enum status_t: { undone: false, ok: true }
+  enum payment_method: { money: 0, visa_credit: 1, visa_debit: 2, master_credit: 3, master_debit: 4, dinners_credit: 5, dinners_debit: 6,
+                          amex_credit: 7, amex_debit: 8, check: 9 }
 
   def self.main_query(options = {})
     #VERIFICAR SE É HOSPEDAGEM
@@ -25,7 +27,8 @@ class Transaction < ApplicationRecord
     @transaction_new = Transaction.new(
       type_t: options[:type_t],
       quantity: options[:quantity], client_code:options[:client_code],
-      price: options[:value], product_code: options[:code],employee_id: options[:employee], data_t: options[:data_trans]
+      price: options[:value], product_code: options[:code],employee_id: options[:employee], data_t: options[:data_trans],
+      payment_method: options[:payment_method]
     )
     
     if @transaction_new.save!
@@ -43,5 +46,10 @@ class Transaction < ApplicationRecord
 
   def self.undo_last
     last.update(status_t: :undone)
+  end
+
+  def self.payment_method_options
+    payment_methods.map { |payment_method, _|
+      [I18n.t("activerecord.attributes.#{model_name.i18n_key}.payment_methods.#{payment_method}"), payment_method]}
   end
 end

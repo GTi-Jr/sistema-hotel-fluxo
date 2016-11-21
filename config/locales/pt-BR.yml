@@ -6,6 +6,17 @@ pt-BR:
         type_ts:
           sale: 'Venda'
           purchase: 'Compra'
+        payment_methods:
+          money: 'Dinheiro'
+          visa_credit: 'Visa Crédito'
+          visa_debit: 'Visa Débito'
+          master_credit: 'MasterCard Crédito'
+          master_debit: 'MasterCard Débito'
+          dinners_credit: 'Dinners Crédito'
+          dinners_debit: 'Dinners Débito'
+          amex_credit: 'American Express Crédito'
+          amex_debit: 'American Express Débito'
+          check: 'Cheque'
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'

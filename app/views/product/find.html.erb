@@ -10,30 +10,46 @@
    <!--col-md-12 start-->
    <div class="col-md-12">
       <div class="box-info">
-         <h3>Informe os dados do Produto [<%= @type=='sale' ? 'Venda' : 'Compra' %>]</h3>
+         <h3><%= @type=='sale' ? 'Venda' : 'Compra' %></h3>
          <div class="row">
             <div class="col-md-2">
-               <input type="text" size="25" id="product_code" onkeyup="suggest(this.value);" onblur="fill();" class="form-control" placeholder="Nome ou código do produto"  required="required" autocomplete="off" />
+               <%= label_tag :product_code, 'Código do Produto', class: 'text-center' %>
+               <input type="text" size="25" id="product_code" onkeyup="suggest(this.value);" onblur="fill();" class="form-control"  required="required" autocomplete="off" />
                <div class="suggestionsBox" id="suggestions" style="display: none;">
                   <img src="../../images/arrow.png" style="position: relative; top: -12px; left: 30px;" alt="upArrow" />
                   <div class="suggestionList" id="suggestionsList"></div>
                </div>
             </div>
             <div class="col-md-2">
-               <input type="text" name="" id="name_prod" class="form-control" placeholder="Nome do Produto" disabled="">
+               <%= label_tag :name_prod, 'Nome do Produto', class: 'text-center' %>
+               <input type="text" name="" id="name_prod" class="form-control" disabled="">
             </div>
             <div class="col-md-2">
-               <input type="text" name="" id="value_prod" class="form-control" placeholder="Valor R$" disabled="">
+               <%= label_tag :value_prod, 'Valor', class: 'text-center' %>
+               <input type="text" name="" id="value_prod" class="form-control" disabled="">
             </div>
             <div class="col-md-2">
-               <input type="number" placeholder="Quantidade" name="" id="quantity" class="form-control">
+               <%= label_tag :quantity, 'Quantidade', class: 'text-center' %>
+               <input type="number" name="" id="quantity" class="form-control" min='1'>
             </div>
             <div class="col-md-2">
-               <input type="number" placeholder="Code Cliente" name="" id="cliente_codigo" class="form-control" disabled="">
+               <%= label_tag :cliente_codigo, 'Código do Cliente', class: 'text-center' %>
+               <input type="number" name="" id="cliente_codigo" class="form-control" disabled="">
             </div>
             <div class="col-md-2">
-               <input type="text" class="form-control form-control-inline input-medium" placeholder="Data de Transação" name="data_trans" id="data_trans" />
                <%= label_tag :data_trans, 'Data de Transação', class: 'text-center' %>
+               <input type="text" class="form-control form-control-inline input-medium" name="data_trans" id="data_trans" />
+            </div>
+         </div>      
+         <div class="col-xs-12">
+            <div class="box-info">
+               <div class="row">
+                  <div class="col-lg-12">
+                     <% form_tag type_product_path, method: :get, class: 'control-label' do %>
+                     <% select_tag "credit_card", options_for_select(Transaction.payment_method_options), class: 'form-control' %>
+                     <% end %>
+                  </div>
+               </div>
             </div>
          </div>
          <hr>
@@ -70,15 +86,27 @@
                </thead>
                <tbody>
                   <% @transactions.each do |transaction| %>
-                     <tr class="gradeX">
-                        <td><%= transaction.product_code %></td>
-                        <td><%= transaction.product.name %></td>
-                        <td><%= transaction.employee.name %></td>
-                        <td><%= transaction.data_t.strftime("%d/%m/%Y") %></td>
-                        <td><%= transaction.price %></td>
-                        <td><%= transaction.quantity %></td>
-                        <td><%= Transaction.human_enum_name(:type_t, transaction.type_t) %></td>
-                     </tr>
+                     <% if transaction.type_t == 'sale' %>
+                        <tr class="gradeX">
+                           <td><%= transaction.product_code %></td>
+                           <td><%= transaction.product.name %></td>
+                           <td><%= transaction.employee.name %></td>
+                           <td><%= transaction.data_t.strftime("%d/%m/%Y") %></td>
+                           <td><%= transaction.price %></td>
+                           <td><%= transaction.quantity %></td>
+                           <td><%= Transaction.human_enum_name(:type_t, transaction.type_t) %></td>
+                        </tr>
+                     <% else %>
+                        <tr class="gradeX warning">
+                           <td><%= transaction.product_code %></td>
+                           <td><%= transaction.product.name %></td>
+                           <td><%= transaction.employee.name %></td>
+                           <td><%= transaction.data_t.strftime("%d/%m/%Y") %></td>
+                           <td><%= transaction.price %></td>
+                           <td><%= transaction.quantity %></td>
+                           <td><%= Transaction.human_enum_name(:type_t, transaction.type_t) %></td>
+                        </tr>
+                     <% end %>
                   <% end %>
                </tbody>
             </table>
