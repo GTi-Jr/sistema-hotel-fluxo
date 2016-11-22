@@ -18,6 +18,7 @@
 
 //= require turbolinks
 //= require js/global
+//= require js/smooth-sliding-menu
 
  /*==RANGE DATE PICKER ==*/
 $(function() {
