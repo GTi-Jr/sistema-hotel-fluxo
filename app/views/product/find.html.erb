@@ -52,7 +52,7 @@
          <div class="row">
             <div class="col-xs-12">
                <button class="btn-primary btn" disabled="true" id="botao_confirmar"  onclick="confirmation_transaction_new('<%= @type %>','<%=current_employee.name%>');">Confirmar</button>
-               <%= link_to 'Desfazer último lançamento', undo_last_transaction_path, method: :put, class:'btn-danger btn', confirm: { data: 'Certeza que deseja desfazer o último lançamento?'} %>
+               <%= link_to 'Desfazer último lançamento', undo_last_transaction_path, method: :put, class:'btn-danger btn', data: {confirm: 'Certeza que deseja desfazer o último lançamento?'}%>
             </div>
          </div>
          <div id="recebe_transaction" hidden=""></div>
@@ -90,7 +90,7 @@
                            <td><%= t("activerecord.attributes.transaction.payment_methods.#{transaction.payment_method}") %></td>
                            <td><%= transaction.data_t.strftime("%d/%m/%Y") %></td>
                            <td><%= transaction.price %></td>
-                           <td><%= transaction.quantity * transaction.quantity %></td>
+                           <td><%= transaction.quantity %></td>
                            <td><%= Transaction.human_enum_name(:type_t, transaction.type_t) %></td>
                         </tr>
                   <% end %>
