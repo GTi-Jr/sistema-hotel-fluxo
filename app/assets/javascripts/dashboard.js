@@ -154,6 +154,7 @@ function confirmation_transaction_new(type, user_name) {
                                 cols += '<td>' + product_code + '</td>';
                                 cols += '<td>' + name_prod + '</td>';
                                 cols += '<td>' + user_name + '</td>';
+                                cols += '<td>' + credit_card + '</td>';
                                 cols += '<td>' + data_trans + '</td>';
                                 cols += '<td>' + parseFloat(value_prod) * parseFloat(quantity) + '</td>';
                                 cols += '<td>' + quantity + '</td>';
@@ -180,4 +181,17 @@ function confirmation_transaction_new(type, user_name) {
         }
     });
 
+}
+
+function press(key){
+   if(key==1){
+    window.location.href = '/';
+   } else if(key==12){
+    window.location.href = '/product';
+   } else if(key==19){
+    window.location.href = '/product/type/sale';
+   } else if(key==6){
+    window.location.href = '/product/type/purchase';
+   }
+   
 }

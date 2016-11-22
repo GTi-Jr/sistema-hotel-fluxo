@@ -78,6 +78,7 @@
                         <th>PRODUTO</th>
                         <th>QUANTIDADE</th>
                         <th>USER</th>
+                        <th>PAGAMENTO</th>
                         <th>DATA DE TRANSAÇÃO</th>
                         <th>DATA DE LANÇAMENTO</th>
                         <th>VALOR</th>
@@ -91,6 +92,7 @@
                            <td><%= transaction.product.name %></td>
                            <td><%= transaction.quantity %></td>
                            <td><%= transaction.employee.name %></td>
+                           <td><%= transaction.payment_method %></td>
                            <td><%= transaction.data_t.strftime("%d/%m/%Y")%></td>
                            <td><%= transaction.created_at.strftime("%d/%m/%Y %H:%M") %></td>
                            <td><%= transaction.price %></td>

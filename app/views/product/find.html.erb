@@ -74,6 +74,7 @@
                      <th>CODE</th>
                      <th>PRODUTO</th>
                      <th>USER</th>
+                     <th>PAGAMENTO</th>
                      <th>DATA DE TRANSAÇÃO</th>
                      <th>VALOR TOTAL</th>
                      <th>QUANTIDADE</th>
@@ -81,28 +82,17 @@
                   </tr>
                </thead>
                <tbody>
-                  <% @transactions.each do |transaction| %>
-                     <% if transaction.type_t == 'sale' %>
-                        <tr class="gradeX">
+                  <% @transactions.each do |transaction| %> 
+                        <tr class="gradeX <%= (transaction.type_t == 'sale' ? 'warning' :'') %> ">
                            <td><%= transaction.product_code %></td>
                            <td><%= transaction.product.name %></td>
                            <td><%= transaction.employee.name %></td>
+                           <td><%= t("activerecord.attributes.transaction.payment_methods.#{transaction.payment_method}") %></td>
                            <td><%= transaction.data_t.strftime("%d/%m/%Y") %></td>
                            <td><%= transaction.price %></td>
-                           <td><%= transaction.quantity %></td>
+                           <td><%= transaction.quantity * transaction.quantity %></td>
                            <td><%= Transaction.human_enum_name(:type_t, transaction.type_t) %></td>
                         </tr>
-                     <% else %>
-                        <tr class="gradeX warning">
-                           <td><%= transaction.product_code %></td>
-                           <td><%= transaction.product.name %></td>
-                           <td><%= transaction.employee.name %></td>
-                           <td><%= transaction.data_t.strftime("%d/%m/%Y") %></td>
-                           <td><%= transaction.price %></td>
-                           <td><%= transaction.quantity %></td>
-                           <td><%= Transaction.human_enum_name(:type_t, transaction.type_t) %></td>
-                        </tr>
-                     <% end %>
                   <% end %>
                </tbody>
             </table>
