@@ -7,7 +7,8 @@ class TransactionController < BaseController
 			data_trans: params[:data_trans],
 			client_code: params[:client_code],
 			value: params[:value],
-			employee: current_employee.id
+			employee: current_employee.id,
+      payment_method: params[:payment_method]
 		)
 
 		if @transaction[:status] == true
@@ -19,11 +20,6 @@ class TransactionController < BaseController
 			noty({text: ' #{@transaction[:message]}', layout: 'bottom', type: 'warning', timeout: 4000});
 			</script>".html_safe  	
     end
-  end
-
-  def destroy
-  	transaction_d = Transaction.find(params[:id]).update(status_t: 0)
-  	redirect_to product_path, notice: 'Feito! Você desfez a sua última ação.'
   end
 
   def search

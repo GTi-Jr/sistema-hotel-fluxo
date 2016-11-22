@@ -41,17 +41,13 @@
                <input type="text" class="form-control form-control-inline input-medium" name="data_trans" id="data_trans" />
             </div>
          </div>      
-         <div class="col-xs-12">
-            <div class="box-info">
-               <div class="row">
-                  <div class="col-lg-12">
-                     <% form_tag type_product_path, method: :get, class: 'control-label' do %>
-                     <% select_tag "credit_card", options_for_select(Transaction.payment_method_options), class: 'form-control' %>
-                     <% end %>
-                  </div>
-               </div>
+         <div class="row" style="margin-top: 8px">
+            <div class="col-md-12">
+            <%= label_tag :data_trans, 'Forma de Pagamento', class: 'text-center' %>
+               <%= select_tag "credit_card", options_for_select(Transaction.payment_method_options), class: 'form-control' %>
             </div>
          </div>
+   
          <hr>
          <div class="row">
             <div class="col-xs-12">

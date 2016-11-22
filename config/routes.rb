@@ -25,7 +25,6 @@ Rails.application.routes.draw do
 
 
     post 'product/transaction' => 'transaction#save', as: :transaction
-    post 'product/transaction/:id' => 'transaction#destroy', as: :transaction_desfazer
 
     get 'transactions/search' => 'transaction#search', as: :search_product
     put 'transactions/undo_last' => 'transaction#undo_last', as: :undo_last_transaction

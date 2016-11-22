@@ -105,6 +105,7 @@ function confirmation_transaction_new(type, user_name) {
     var data_trans = $('#data_trans').val();
     var value_prod = $('#value_prod').val();
     var name_prod = $('#name_prod').val();
+    var credit_card= $('#credit_card').val(); 
     var sent = false; //PREVENIR 2 CLICK
     /*CONVERTER DATA */
     var convertDate = function(usDate) {
@@ -135,7 +136,8 @@ function confirmation_transaction_new(type, user_name) {
                             'type': type,
                             'data_trans': data_trans_n,
                             'client_code': client_code,
-                            'value': value_prod
+                            'value': value_prod,
+                            'payment_method': credit_card
                         },
                         success: function(html) {
                             if (html === 'tudo_ok') {
@@ -147,7 +149,7 @@ function confirmation_transaction_new(type, user_name) {
                                 $('#name_prod').val("");
 
                                 /*LOAD TABLE */
-                                var newRow = $('<tr class="gradeX">');
+                                var newRow = $('<tr class="gradeX success">');
                                 var cols = "";
                                 cols += '<td>' + product_code + '</td>';
                                 cols += '<td>' + name_prod + '</td>';
