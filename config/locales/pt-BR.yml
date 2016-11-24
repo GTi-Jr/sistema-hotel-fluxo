@@ -2,6 +2,11 @@
 pt-BR:
   activerecord:
     attributes:
+      products:
+        type_ts:
+          sale: 'Venda'
+          purchase: 'Compra'
+          both: 'Ambos'
       transaction:
         type_ts:
           sale: 'Venda'

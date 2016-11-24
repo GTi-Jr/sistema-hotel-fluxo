@@ -56,14 +56,15 @@ $(function() {
 
 
 /* Auto suggest CODE_PRODUCT*/
-function suggest(inputString) {
+function suggest(inputString, inputType) {
     if (inputString.trim().length == "") {
         $('#suggestions').fadeOut();
         $('#botao_confirmar').prop('disabled', true);
     } else {
         $('#product_code ').addClass('load');
         $.post("/product/suggestion", {
-            queryString: "" + inputString + ""
+            queryString: "" + inputString + "", 
+            product_type_t: inputType
         }, function(data) {
             if (data.length > 0) {
                 $('#suggestions').fadeIn();

@@ -21,13 +21,13 @@ class ProductController < BaseController
   end
 
   def suggestion
-    @product_suggestion = Suggestion.main_query(queryString: params[:queryString].strip)
+    @products_suggestions = Suggestion.main_query(queryString: params[:queryString].strip, product_type_t: params[:product_type_t])
 
-    if @product_suggestion==false  ||  params[:queryString].strip == ""
+    if @products_suggestions==false  ||  params[:queryString].strip == ""
        render html: ('<ul><li>Nada encontrado.</li></ul>').html_safe
     else
         texto = "<ul id=\"ulSugest\">"
-        @product_suggestion.each do |product_list| 
+        @products_suggestions.each do |product_list| 
          texto += "<li onClick=\"fill(\'#{product_list.code} \' ,\'#{product_list.price}\', \'#{product_list.name}\');\">#{product_list.code} - #{product_list.name}</li>"
         end
         texto += "</ul>"

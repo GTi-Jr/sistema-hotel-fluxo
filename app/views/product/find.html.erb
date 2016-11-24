@@ -14,7 +14,7 @@
          <div class="row">
             <div class="col-md-2">
                <%= label_tag :product_code, 'Código do Produto', class: 'text-center' %>
-               <input type="text" size="25" id="product_code" onkeyup="suggest(this.value);" onblur="fill();" class="form-control"  required="required" autocomplete="off" />
+               <input type="text" size="25" id="product_code" onkeyup="suggest(this.value, '<%= @type %>');" onblur="fill();" class="form-control"  required="required" autocomplete="off" />
                <div class="suggestionsBox" id="suggestions" style="display: none;">
                   <img src="../../images/arrow.png" style="position: relative; top: -12px; left: 30px;" alt="upArrow" />
                   <div class="suggestionList" id="suggestionsList"></div>
