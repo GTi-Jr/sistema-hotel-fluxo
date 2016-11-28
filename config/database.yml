@@ -18,7 +18,7 @@ default: &default
 development:
   <<: *default
   username: root
-  password: 
+  password:
   database: hotel_development
 
 # Warning: The database defined as "test" will be erased and
@@ -27,7 +27,7 @@ development:
 test:
   <<: *default
   username: root
-  password: 
+  password:
   database: hotel_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
@@ -51,9 +51,7 @@ test:
 #
 production:
   <<: *default
-  database: hotel_production
-  username: deploy
-  password: <%= ENV['HOTEL_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DOKKU_MYSQL_BLUE_URL'] %>
 
 staging:
   <<: *default
