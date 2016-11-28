@@ -19,9 +19,11 @@
 //= require turbolinks
 //= require js/global
 //= require js/smooth-sliding-menu
+//= require js/jquery.maskMoney.min
 
  /*==RANGE DATE PICKER ==*/
 $(function() {
+    $('#value_prod').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:'.', affixesStay: false}); //MASCARA DE GRANA
     var start = moment();
     var end = moment();
     function cb(start, end) {
@@ -109,6 +111,16 @@ function confirmation_transaction_new(type, user_name) {
     var name_prod = $('#name_prod').val();
     var credit_card= $('#credit_card').val(); 
     var sent = false; //PREVENIR 2 CLICK
+    var payment_array = {money: "Dinheiro", 
+                         visa_credit:"Visa Crédito", 
+                         visa_debit: "Visa Débito", 
+                         master_credit: "MasterCard Crédito",
+                         master_debit: "MasterCard Débito",
+                         dinners_credit: "Dinners Crédito", 
+                         dinners_debit: "Dinners Débito", 
+                         amex_credit: "American Express Crédito", 
+                         amex_debit: "American Express Débito", 
+                         check: "Cheque"};
     /*CONVERTER DATA */
     var convertDate = function(usDate) {
         var dateParts = usDate.split(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
@@ -119,7 +131,6 @@ function confirmation_transaction_new(type, user_name) {
     var type_text = type == 'sale' ? 'Venda' : 'Compra'; // APENAS PARA A ALERTA
     var text = '<span class="fa fa-exclamation-triangle" style="float:left; margin:0 7px 20px 0;"></span><b>Atenção:</b> Voçê confirma a ' + type_text + ' do produto de código #' + product_code + '?</br>';
     text += '<b>Quantidade: </b> ' + quantity + ' - <b>Valor Total:</b> R$ ' + (quantity * value_prod) + '';
-
     $.confirm({
         title: type_text + ' de um produto/serviço',
         message: text,
@@ -156,9 +167,9 @@ function confirmation_transaction_new(type, user_name) {
                                 cols += '<td>' + product_code + '</td>';
                                 cols += '<td>' + name_prod + '</td>';
                                 cols += '<td>' + user_name + '</td>';
-                                cols += '<td>' + credit_card + '</td>';
+                                cols += '<td>' + payment_array[credit_card] + '</td>';
                                 cols += '<td>' + data_trans + '</td>';
-                                cols += '<td>' + parseFloat(value_prod) * parseFloat(quantity) + '</td>';
+                                cols += '<td>R$ ' + parseFloat(value_prod) * parseFloat(quantity) + '</td>';
                                 cols += '<td>' + quantity + '</td>';
                                 cols += '<td>' + type_text + '</td>';
 
@@ -184,6 +195,7 @@ function confirmation_transaction_new(type, user_name) {
     });
 
 }
+
 
 function press(key){
    if(key==1){

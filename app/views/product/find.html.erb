@@ -34,7 +34,7 @@
             </div>
             <div class="col-md-2">
                <%= label_tag :cliente_codigo, 'Código do Cliente', class: 'text-center' %>
-               <input type="number" name="" id="cliente_codigo" class="form-control" disabled="">
+               <input type="text" name="" id="cliente_codigo" class="form-control" disabled="">
             </div>
             <div class="col-md-2">
                <%= label_tag :data_trans, 'Data de Transação', class: 'text-center' %>
@@ -89,7 +89,7 @@
                            <td><%= transaction.employee.name %></td>
                            <td><%= t("activerecord.attributes.transaction.payment_methods.#{transaction.payment_method}") %></td>
                            <td><%= transaction.data_t.strftime("%d/%m/%Y") %></td>
-                           <td><%= transaction.price %></td>
+                           <td>R$ <%= transaction.price %></td>
                            <td><%= transaction.quantity %></td>
                            <td><%= Transaction.human_enum_name(:type_t, transaction.type_t) %></td>
                         </tr>
