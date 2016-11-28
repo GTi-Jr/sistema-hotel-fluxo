@@ -3,8 +3,6 @@ source 'https://rubygems.org'
 # GEM'S ADICIONADAS MANUALMENTE
 gem 'devise'
 
-gem 'puma'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use mysql as the database for Active Record
@@ -53,7 +51,5 @@ group :development do
   gem 'capistrano-rails', require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano3-puma'
-
-
 end
 
