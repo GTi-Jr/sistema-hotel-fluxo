@@ -3,6 +3,7 @@ class Transaction < ApplicationRecord
   belongs_to :employee
 
   before_create :set_price
+  before_create :add_or_remove_amount_from_cash_register
 
   enum type_t: { sale: 0, purchase: 1 }
   enum status_t: { undone: false, ok: true }
@@ -38,6 +39,10 @@ class Transaction < ApplicationRecord
     end
   end
 
+  def sale?
+    type_t == 'sale'
+  end
+
   def set_price
     unless product.name == 'Hospedagem'
       self.price = quantity * product.price
@@ -51,5 +56,19 @@ class Transaction < ApplicationRecord
   def self.payment_method_options
     payment_methods.map { |payment_method, _|
       [I18n.t("activerecord.attributes.#{model_name.i18n_key}.payment_methods.#{payment_method}"), payment_method]}
+  end
+
+  private
+
+  def add_or_remove_amount_from_cash_register
+    sale? ? add_amount_to_cash_register : remove_amount_from_cash_register
+  end
+
+  def add_amount_to_cash_register
+    CashRegister.add(price)
+  end
+
+  def remove_amount_from_cash_register
+    CashRegister.remove(price)
   end
 end
