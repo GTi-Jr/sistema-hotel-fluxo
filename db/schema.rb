@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124025205) do
+ActiveRecord::Schema.define(version: 20161129202407) do
 
   create_table "departments", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -64,6 +64,17 @@ ActiveRecord::Schema.define(version: 20161124025205) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "settings", force: :cascade do |t|
+    t.string   "var",        limit: 255,   null: false
+    t.text     "value",      limit: 65535
+    t.integer  "thing_id",   limit: 4
+    t.string   "thing_type", limit: 30
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "settings", ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true, using: :btree
 
   create_table "transactions", force: :cascade do |t|
     t.integer  "payment_method", limit: 4

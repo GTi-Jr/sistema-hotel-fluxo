@@ -1,21 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
-
-Sector.create(name: 'Todos')
-Sector.create(name: 'Portaria')
-Sector.create(name: 'Garçons')
-Department.create(name: 'Todos')
-Department.create(name: 'Cozinha')
-Department.create(name: 'Recepçao')
-Product.create(name: 'Hospedagem', code: '555', sector_id: '1', department_id: '1')
-Employee.create(name: 'Admin GTI',email: 'admin@hotel.com', password: 'admin123', sector_id: '1', department_id: '1',code: '123', admin:true)
-
-
-
-Product.create(name: 'Coca-Cola 2L', code: '123', sector_id: '1', department_id: '1', price: '6.99')
+# NÃO RODAR ESSE ARQUIVO APÓS ENTRAR EM PRODUÇÃO. **********************
+Employee.create(name: 'Admin GTI', email: 'admin@hotel.com', password: ENV['ADMIN_PASSWORD'], sector_id: '1', department_id: '1', code: '123', admin: true)
+# Inicializa o dinheiro em caixa
+MoneyFlowSettings.amount_inside_cash_register = 0
