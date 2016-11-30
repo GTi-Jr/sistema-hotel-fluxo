@@ -13,10 +13,12 @@ class HistoryQuery
       @transactions = transactions.includes(:product).where(products: { code: options[:code].to_i })
     end
 
-    case options[:type_t]
-    when :all
-    when :sale     then @transactions = transactions.where(type_t: 0) # 0 sale
-    when :purchase then @transactions = transactions.where(type_t: 1) # 1 purchase
+    if options[:type_t] == "all"
+      #NADA
+    elsif options[:type_t] == "sales"
+      @transactions = transactions.where(type_t: 0) # 0 sale
+    elsif options[:type_t] == "purchases"
+      @transactions = transactions.where(type_t: 1) # 0 sale
     end
 
     if options[:department_id].present?
@@ -24,6 +26,7 @@ class HistoryQuery
     end
 
     @transactions || Transaction.none
+
   end
 
   private

@@ -82,6 +82,7 @@
                         <th>DATA DE TRANSAÇÃO</th>
                         <th>DATA DE LANÇAMENTO</th>
                         <th>VALOR</th>
+                        <th>TIPO</th>
                      </tr>
                   </thead>
                
@@ -92,10 +93,11 @@
                            <td><%= transaction.product.name %></td>
                            <td><%= transaction.quantity %></td>
                            <td><%= transaction.employee.name %></td>
-                           <td><%= transaction.payment_method %></td>
+                           <td><%= t("activerecord.attributes.transaction.payment_methods.#{transaction.payment_method}") %></td>
                            <td><%= transaction.data_t.strftime("%d/%m/%Y")%></td>
                            <td><%= transaction.created_at.strftime("%d/%m/%Y %H:%M") %></td>
                            <td><%= transaction.price %></td>
+                           <td><%= t("activerecord.attributes.products.type_ts.#{transaction.type_t}") %></td>            
                         </tr>
                      <% end %>
                   </tbody>
