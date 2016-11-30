@@ -49,7 +49,7 @@ class Transaction < ApplicationRecord
     end
   end
 
-  def self.undo_last
+  def self.undo_last 
     last.update(status_t: :undone)
   end
 
@@ -58,7 +58,7 @@ class Transaction < ApplicationRecord
       [I18n.t("activerecord.attributes.#{model_name.i18n_key}.payment_methods.#{payment_method}"), payment_method]}
   end
 
-  private
+  private 
 
   def add_or_remove_amount_from_cash_register
     sale? ? add_amount_to_cash_register : remove_amount_from_cash_register
