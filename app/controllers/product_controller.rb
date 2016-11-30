@@ -10,8 +10,10 @@ class ProductController < BaseController
 
   def find
     @type = params[:type]
+    @money_amount_in_cash_register = CashRegister.amount
 
-    if @type!='sale' &&  @type!='purchase'
+    #if @type!='sale' &&  @type!='purchase'
+    unless @type.in?(Product.type_ts.map { |key, value| key })
       redirect_to product_path, alert: 'Tipo de lançamento não encontrado.'
     end
 
