@@ -88,8 +88,10 @@ function fill(thisValue, price, name) {
     }
     if (thisValue == 555) {
         $('#cliente_codigo').prop('disabled', false);
+        $('#quantity').prop('disabled', true);
     } else {
         $('#cliente_codigo').prop('disabled', true);
+        $('#quantity').prop('disabled', false);
     }
     $('#name_prod').val(name);
     $('#quantity').val(1);
@@ -143,6 +145,7 @@ function confirmation_transaction_new(type, user_name) {
                     $.ajax({
                         url: '/product/transaction',
                         type: 'post',
+                        dataType: 'json',
                         data: {
                             'code': product_code,
                             'quantity': quantity,
@@ -153,36 +156,35 @@ function confirmation_transaction_new(type, user_name) {
                             'payment_method': credit_card
                         },
                         success: function(html) {
-                            if (html === 'tudo_ok') {
-                                /* ZERAR */
-                                $('#cliente_codigo').val("");
-                                $('#quantity').val("");
-                                $('#product_code').val("");
-                                $('#value_prod').val("");
-                                $('#name_prod').val("");
+                            /* ZERAR */
+                            console.log(html[0]);
+                            $('#cliente_codigo').val("");
+                            $('#quantity').val("");
+                            $('#product_code').val("");
+                            $('#value_prod').val("");
+                            $('#name_prod').val("");
 
-                                /*LOAD TABLE */
-                                var newRow = $('<tr class="gradeX success">');
-                                var cols = "";
-                                cols += '<td>' + product_code + '</td>';
-                                cols += '<td>' + name_prod + '</td>';
-                                cols += '<td>' + user_name + '</td>';
-                                cols += '<td>' + payment_array[credit_card] + '</td>';
-                                cols += '<td>' + data_trans + '</td>';
-                                cols += '<td>R$ ' + parseFloat(value_prod) * parseFloat(quantity) + '</td>';
-                                cols += '<td>' + quantity + '</td>';
-                                cols += '<td>' + type_text + '</td>';
+                            /*LOAD TABLE */
+                            var newRow = $('<tr class="gradeX success">');
+                            var cols = "";
+                            cols += '<td>' + product_code + '</td>';
+                            cols += '<td>' + name_prod + '</td>';
+                            cols += '<td>' + user_name + '</td>';
+                            cols += '<td>' + payment_array[credit_card] + '</td>';
+                            cols += '<td>' + data_trans + '</td>';
+                            cols += '<td>R$ ' + parseFloat(value_prod) * parseFloat(quantity) + '</td>';
+                            cols += '<td>' + quantity + '</td>';
+                            cols += '<td>' + type_text + '</td>';
+                            cols += '<td>'+html[0].stock+'</td>';
 
-                                newRow.append(cols);
-                                $("#anteriores_table").prepend(newRow);
-                                $('#botao_confirmar').prop('disabled', true);
-
-                            }
-                            $("#recebe_transaction").html(html);
+                            newRow.append(cols);
+                            $("#anteriores_table").prepend(newRow);
+                            $('#botao_confirmar').prop('disabled', true);
+                            //$("#recebe_transaction").html(html);
+                            $("#receber_cash").html(html[0].amount_cash);
                         },
                         error: function(erro) {
-                            $('#recebe_transaction').html("OPS! ERRO AO CADASTRAR.");
-                            console.log(erro);
+                            $('#recebe_transaction').html(erro['responseText']);
                         }
                     });
                 }

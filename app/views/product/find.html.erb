@@ -10,7 +10,7 @@
    <!--col-md-12 start-->
    <div class="col-xs-12">
      <div class="box-info">
-      <h3>Quantidade em caixa: <%= number_to_currency(@money_amount_in_cash_register) %></h3>
+      <h3>Quantidade em caixa: <span id="receber_cash"><%= number_to_currency(@money_amount_in_cash_register) %></span></h3>
      </div>
    </div>
    <div class="col-md-12">
@@ -60,7 +60,7 @@
                <%= link_to 'Desfazer último lançamento', undo_last_transaction_path, method: :put, class:'btn-danger btn', data: {confirm: 'Certeza que deseja desfazer o último lançamento?'}%>
             </div>
          </div>
-         <div id="recebe_transaction" hidden=""></div>
+         <div id="recebe_transaction" ></div>
       </div>
    </div>
 </div>
@@ -84,6 +84,7 @@
                      <th>VALOR TOTAL</th>
                      <th>QUANTIDADE</th>
                      <th>TIPO</th>
+                     <th>ESTOQUE</th>
                   </tr>
                </thead>
                <tbody>
@@ -97,6 +98,7 @@
                            <td>R$ <%= transaction.price %></td>
                            <td><%= transaction.quantity %></td>
                            <td><%= Transaction.human_enum_name(:type_t, transaction.type_t) %></td>
+                           <td><%= transaction.stock  %></td>
                         </tr>
                   <% end %>
                </tbody>

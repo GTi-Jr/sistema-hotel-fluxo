@@ -1,4 +1,7 @@
-class HistoryQuery
+class HistoryQuery  < ApplicationRecord
+  enum payment_method: { money: 0, visa_credit: 1, visa_debit: 2, master_credit: 3, master_debit: 4, dinners_credit: 5, dinners_debit: 6,
+                          amex_credit: 7, amex_debit: 8, check: 9 }
+
   def self.main_query(options = {})
     reset_query_state
 
@@ -23,6 +26,10 @@ class HistoryQuery
 
     if options[:department_id].present?
       @transactions = transactions.includes(:product).where(products: { department_id: options[:department_id] } )
+    end
+
+    unless options[:credit_card].blank?
+      @transactions = transactions.where(payment_method: options[:credit_card])
     end
 
     @transactions || Transaction.none

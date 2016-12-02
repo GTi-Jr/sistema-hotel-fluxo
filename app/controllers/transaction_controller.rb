@@ -12,13 +12,18 @@ class TransactionController < BaseController
     )
 
     if @transaction[:status] == true
-      @id_create = @transaction[:message]
-      #render '/product/transaction' , layout: false
-      render html: "tudo_ok".html_safe
+      @stock = @transaction[:message]
+      
+      respond_to do |format|
+        format.js { render json: [{"stock": @stock, "amount_cash": ActiveSupport::NumberHelper.number_to_currency(CashRegister.amount)}]  , status: 200 }
+      end
+
     else
-      render html: "<script>
-      noty({text: ' #{@transaction[:message]}', layout: 'bottom', type: 'warning', timeout: 4000});
-      </script>".html_safe    
+      respond_to do |format|
+        format.js { render json: "<script>
+                                   noty({text: ' #{@transaction[:message]}', layout: 'bottom', type: 'warning', timeout: 4000});
+                                  </script>" }
+      end
     end
   end
 
@@ -31,15 +36,16 @@ class TransactionController < BaseController
       end_date: params[:end_date],
       type_t: params[:type],
       code: params[:code],
-      department_id: params[:departments]
+      department_id: params[:departments],
+      credit_card: params[:credit_card]
     )
   end
 
   def undo_last
-    if Transaction.last.status_t ==  'undone'
+    if current_employee.transactions.last.status_t ==  'undone'
       redirect_to :back, alert: 'Última transação já foi desfeita!'
     else
-      Transaction.undo_last
+      Transaction.undo_last(current_employee)
       redirect_to :back, notice: 'Você desfez o último lançamento!'
     end
   end
