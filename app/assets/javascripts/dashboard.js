@@ -157,7 +157,6 @@ function confirmation_transaction_new(type, user_name) {
                         },
                         success: function(html) {
                             /* ZERAR */
-                            console.log(html[0]);
                             $('#cliente_codigo').val("");
                             $('#quantity').val("");
                             $('#product_code').val("");
