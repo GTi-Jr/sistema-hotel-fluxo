@@ -1,7 +1,4 @@
-class HistoryQuery  < ApplicationRecord
-  enum payment_method: { money: 0, visa_credit: 1, visa_debit: 2, master_credit: 3, master_debit: 4, dinners_credit: 5, dinners_debit: 6,
-                          amex_credit: 7, amex_debit: 8, check: 9 }
-
+class HistoryQuery
   def self.main_query(options = {})
     reset_query_state
 
@@ -24,12 +21,30 @@ class HistoryQuery  < ApplicationRecord
       @transactions = transactions.where(type_t: 1) # 0 sale
     end
 
-    if options[:department_id].present?
+    unless options[:department_id].to_i == 1 
       @transactions = transactions.includes(:product).where(products: { department_id: options[:department_id] } )
     end
 
-    unless options[:credit_card].blank?
-      @transactions = transactions.where(payment_method: options[:credit_card])
+    if options[:payment_method] == 'money'
+      @transactions = transactions.where(payment_method: 0)
+    elsif options[:payment_method] == 'visa_credit'
+      @transactions = transactions.where(payment_method: 1)
+    elsif options[:payment_method] == 'visa_debit'
+      @transactions = transactions.where(payment_method: 2)
+    elsif options[:payment_method] == 'master_credit'
+      @transactions = transactions.where(payment_method: 3)
+    elsif options[:payment_method] == 'master_debit'
+      @transactions = transactions.where(payment_method: 4)
+    elsif options[:payment_method] == 'dinners_credit'
+      @transactions = transactions.where(payment_method: 5)
+    elsif options[:payment_method] == 'dinners_debit'
+      @transactions = transactions.where(payment_method: 6)
+    elsif options[:payment_method] == 'amex_credit'
+      @transactions = transactions.where(payment_method: 7)
+    elsif options[:payment_method] == 'amex_debit'
+      @transactions = transactions.where(payment_method: 8)
+    elsif options[:payment_method] == 'check'
+      @transactions = transactions.where(payment_method: 9)
     end
 
     @transactions || Transaction.none

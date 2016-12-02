@@ -52,7 +52,7 @@ class Transaction < ApplicationRecord
   end
 
   def set_price
-    unless product.name == 'Hospedagem'
+    unless product.name == 'Hospedagem' || product.name == 'Suprimento' || product.name == 'Alivio'
       self.price = quantity * product.price
     end
   end

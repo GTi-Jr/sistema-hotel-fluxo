@@ -111,7 +111,7 @@ function confirmation_transaction_new(type, user_name) {
     var data_trans = $('#data_trans').val();
     var value_prod = $('#value_prod').val();
     var name_prod = $('#name_prod').val();
-    var credit_card= $('#credit_card').val(); 
+    var payment_method= $('#payment_method').val(); 
     var sent = false; //PREVENIR 2 CLICK
     var payment_array = {money: "Dinheiro", 
                          visa_credit:"Visa Crédito", 
@@ -153,7 +153,7 @@ function confirmation_transaction_new(type, user_name) {
                             'data_trans': data_trans_n,
                             'client_code': client_code,
                             'value': value_prod,
-                            'payment_method': credit_card
+                            'payment_method': payment_method
                         },
                         success: function(html) {
                             /* ZERAR */
@@ -169,7 +169,7 @@ function confirmation_transaction_new(type, user_name) {
                             cols += '<td>' + product_code + '</td>';
                             cols += '<td>' + name_prod + '</td>';
                             cols += '<td>' + user_name + '</td>';
-                            cols += '<td>' + payment_array[credit_card] + '</td>';
+                            cols += '<td>' + payment_array[payment_method] + '</td>';
                             cols += '<td>' + data_trans + '</td>';
                             cols += '<td>R$ ' + parseFloat(value_prod) * parseFloat(quantity) + '</td>';
                             cols += '<td>' + quantity + '</td>';

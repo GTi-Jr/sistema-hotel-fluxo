@@ -49,7 +49,7 @@
          <div class="row" style="margin-top: 8px">
             <div class="col-md-12">
             <%= label_tag :data_trans, 'Forma de Pagamento', class: 'text-center' %>
-               <%= select_tag "credit_card", options_for_select(Transaction.payment_method_options), class: 'form-control' %>
+               <%= select_tag "payment_method", options_for_select(Transaction.payment_method_options), class: 'form-control' %>
             </div>
          </div>
    

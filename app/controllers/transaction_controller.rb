@@ -37,7 +37,7 @@ class TransactionController < BaseController
       type_t: params[:type],
       code: params[:code],
       department_id: params[:departments],
-      credit_card: params[:credit_card]
+      payment_method: params[:payment_method]
     )
   end
 

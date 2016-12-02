@@ -4,7 +4,7 @@ RSpec.describe HistoryQuery, :type => :model do
   before :each do
     @department_1 = Department.create!
     @department_2 = Department.create!
-    @product_1 = Product.create!(code: 111, price: 10, department: @department_1)
+    @product_1 = Product.create!(code: 111, price: 10, department: @department_1, stock: 3)
     @product_2 = Product.create!(code: 222, price: 20, department: @department_2)
     @product_3 = Product.create!(code: 333, price: 30, department: @department_1)
     @product_4 = Product.create!(code: 444, price: 40, department: @department_2)
