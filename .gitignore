@@ -8,6 +8,8 @@
 /.bundle
 
 # Ignore all logfiles and tempfiles.
+
+/config/database.yml
+.DS_Store
 /log/*
-!/log/.keep
-/tmp
+/tmp/*
