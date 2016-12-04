@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock '3.6.1'
 
-set :application, 'sistema_hotel_fluxo'
+set :application, 'sistema_hotel'
 set :repo_url, 'git@github.com:GTi-Jr/sistema-hotel-fluxo.git'
 
 # Default branch is :master
@@ -9,7 +9,7 @@ set :repo_url, 'git@github.com:GTi-Jr/sistema-hotel-fluxo.git'
 
 # Default deploy_to directory is /var/www/my_app_name
 
-set :deploy_to, '/home/rails/sistema_hotel_fluxo'
+set :deploy_to, '/home/rails/sistema_hotel'
 set :use_sudo, false
 
 # Default value for :scm is :git
