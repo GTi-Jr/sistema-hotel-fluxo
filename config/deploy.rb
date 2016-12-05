@@ -28,17 +28,31 @@ set :puma_worker_timeout, nil
 set :puma_init_active_record, true
 set :puma_preload_app, false
 
-desc 'Runs rake db:seed'
-task :seed => [:set_rails_env] do
-  on primary fetch(:migration_role) do
-    within release_path do
-      with rails_env: fetch(:rails_env) do
-        execute :rake, "db:seed"
+namespace :db do
+  desc "Seed the database."
+  task :seed do
+    on roles(:app) do
+      within "#{current_path}" do
+        with rails_env: :production do
+          execute :rake, "db:seed"
+        end
       end
     end
   end
-end
 
+  desc "Seed the database."
+  task :setup do
+    on roles(:app) do
+      within "#{current_path}" do
+        with rails_env: :production do
+          execute :rake, "db:drop db:create db:migrate db:seed"
+        end
+      end
+    end
+  end
+
+
+end
 # namespace :rake do
 #   namespace :db do
 #     %w[create migrate reset rollback seed setup].each do |command|
