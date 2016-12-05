@@ -93,7 +93,9 @@
                
                   <tbody>
                      <% @transactions.each do |transaction| %>
-                        <tr class="gradeX <%= (transaction.status_t == 'undone' ? 'danger' :'') %> <%= (transaction.type_t == 'sale' ? 'warning' :'') %> ">">
+                        <tr class="gradeX <%= (transaction.status_t == 'undone' ? 'danger' :'') %> <%= if (transaction.type_t == 'sale' && transaction.status_t != 'undone')
+                            'warning'
+                           end %> ">
                            <td><%= transaction.id %></td>
                            <td><%= transaction.product.name %></td>
                            <td><%= transaction.employee.name %></td>
@@ -101,7 +103,7 @@
                            <td><%= transaction.data_t.strftime("%d/%m/%Y")%></td>
                            <td><%= transaction.price %></td>
                            <td><%= transaction.quantity %></td>
-                           <td><%= t("activerecord.attributes.products.type_ts.#{transaction.type_t}") %></td>
+                           <td><%= t("activerecord.attributes.products.type_ts.#{transaction.type_t}") %><%= (transaction.status_t == 'undone' ? ' [DESFEITO]' :'') %></td>
                         </tr>
                      <% end %>
                   </tbody>
