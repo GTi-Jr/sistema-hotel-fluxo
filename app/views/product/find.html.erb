@@ -8,11 +8,13 @@
    <!--col-md-12 end-->
    <!--conteudo INCIAL -->
    <!--col-md-12 start-->
-   <div class="col-xs-12">
-     <div class="box-info">
-      <h3>Quantidade em caixa: <span id="receber_cash"><%= number_to_currency(@money_amount_in_cash_register) %></span></h3>
+   <div class="col-md-12">
+     <div class="box-info cash_money">
+       <h3>Quantidade em caixa: <%= number_to_currency(@money_amount_in_cash_register) %></h3>
      </div>
    </div>
+
+
    <div class="col-md-12">
       <div class="box-info">
          <h3><%= @type=='sale' ? 'Venda' : 'Compra' %></h3>
@@ -73,7 +75,7 @@
             <div class="digg_pagination">
                <%= will_paginate @transactions, :container => false %>
             </div>
-            <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered" id="anteriores_table">
+            <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered responsive" id="anteriores_table">
                <thead>
                   <tr>
                      <th>CODE</th>

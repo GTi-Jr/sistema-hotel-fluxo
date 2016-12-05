@@ -29,8 +29,7 @@ class TransactionController < BaseController
 
   def search
     @departments = Department.all
-    @initial_date = params[:initial_date]
-    @end_date = params[:end_date]
+    @date = params[:date_range]
     @transactions = HistoryQuery.main_query(
       date_range: params[:date_range],
       end_date: params[:end_date],

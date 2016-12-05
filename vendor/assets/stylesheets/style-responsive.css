@@ -364,5 +364,14 @@ label {
 	border-radius: 0;
 	box-shadow: none;
 }
+ @media (max-width:481px) { 
+/*mobile */
+.cash_money h3{
+font-size: 20px;
+}
 
+}
 
+select[name="hidden-table-info_length"] {
+	width: 70px;
+}

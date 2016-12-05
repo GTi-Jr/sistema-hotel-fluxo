@@ -11,7 +11,7 @@
 //= require datatables/buttons.print.min
 //= require datatables/dataTables.fixedHeader.min
 //= require datatables/dataTables.keyTable.min
-//= require datatables/dataTables.responsive.min
+//= require datatables/responsive-tables.js
 //= require datatables/dataTables.scroller.min
 //= require date/moment.min
 //= require date/daterangepicker

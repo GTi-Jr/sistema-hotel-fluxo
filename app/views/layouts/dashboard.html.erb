@@ -31,7 +31,7 @@
   			<ul class="navigation">
   				<li><a class="active" href="/"><i class="fa fa-home"></i><span>Dashboard</span></a></li>
   				<li class="sub">
-  					<a href="#"><i class="fa fa-barcode"></i><span>Lançamentos</span></a>
+  					<a href="javascript:void(0)"><i class="fa fa-barcode"></i><span>Lançamentos</span></a>
   					<ul class="navigation-sub">
               <li><%= link_to product_path do %><i class="fa fa-plus-square-o" ></i><span>Identificar</span><% end -%>
               </li>
@@ -40,7 +40,7 @@
           </li>
           <%if current_employee && current_employee.admin?  %>
           <li class="sub">
-           <a href="#"><i class="fa fa-user"></i><span>Usuários</span></a>
+           <a href="javascript:void(0)"><i class="fa fa-user"></i><span>Usuários</span></a>
            <ul class="navigation-sub">
             <li><%= link_to new_admin_employee_path do %><i class="fa fa-plus" ></i><span>Cadastrar</span><% end -%>
             </li>

@@ -5,12 +5,15 @@
   $('#hidden-table-info').dataTable({
 
         "iDisplayLength": 50,
-        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sLengthMenu": "Entradas por página: <span class=''> _MENU_</span>",
+        },
 
-          dom: 'lfrtBip',
-             buttons: [
-             'copy', 'csv', 'excel', 'pdf'
+          dom: '<"widget-head clearfix"fl>rtBip',
+          buttons: [
+             'csv', 'excel', 'pdf'
             ] 
+            
     });
 
  
