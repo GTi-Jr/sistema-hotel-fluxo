@@ -86,7 +86,7 @@ function fill(thisValue, price, name) {
         $('#value_prod').prop('disabled', true);
         $('#value_prod').val(price);
     }
-    if (thisValue == 555) {
+    if (name == 'Hospedagem') {
         $('#cliente_codigo').prop('disabled', false);
         $('#quantity').prop('disabled', true);
     } else {

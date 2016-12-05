@@ -93,7 +93,7 @@
                
                   <tbody>
                      <% @transactions.each do |transaction| %>
-                        <tr class="gradeX">
+                        <tr class="gradeX <%= (transaction.status_t == 'undone' ? 'danger' :'') %>">
                            <td><%= transaction.id %></td>
                            <td><%= transaction.product.name %></td>
                            <td><%= transaction.employee.name %></td>
