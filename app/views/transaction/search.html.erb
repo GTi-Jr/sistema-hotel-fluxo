@@ -98,7 +98,7 @@
                             'warning'
                            end %> ">
                            <td><%= transaction.id %></td>
-                           <td><%= transaction.product.name %></td>
+                           <td>#<%= transaction.product.code %> - <%= transaction.product.name %></td>
                            <td><%= transaction.employee.name %></td>
                            <td><%= t("activerecord.attributes.transaction.payment_methods.#{transaction.payment_method}") %></td>
                            <td><%= transaction.data_t.strftime("%d/%m/%Y")%></td>
