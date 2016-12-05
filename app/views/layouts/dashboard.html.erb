@@ -5,8 +5,8 @@
 	<meta charset="utf-8">
 	<title>Gerenciamento de Produtos e Serviços - Porto Futuro Hotel</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<%= stylesheet_link_tag  'dashboard', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'nottyandjquery', 'data-turbolinks-track' => true %>
+	<%= stylesheet_link_tag  'dashboard', media: 'all' %>
+  <%= javascript_include_tag 'nottyandjquery' %>
 
   <%= csrf_meta_tags %>
   <!--  *= require plugins/kalendar/kalendar-->
@@ -19,14 +19,14 @@
   </head>
   <body onKeyPress="press(event.keyCode)">
   	<!--layout-container start-->
-  	<div id="layout-container"> 
+  	<div id="layout-container">
   		<!--Left navbar start-->
   		<div id="nav">
   			<!--logo start-->
   			<div class="profile">
   				<div class="logo"><a href="/"><%= image_tag "logo.png" %></a></div>
   			</div>
-  			<!--logo end--> 
+  			<!--logo end-->
   			<!--navigation start [MENU-EDITAR]-->
   			<ul class="navigation">
   				<li><a class="active" href="/"><i class="fa fa-home"></i><span>Dashboard</span></a></li>
@@ -55,24 +55,24 @@
        </li>
 
 
- 
+
    </ul>
-   <!--navigation end--> 
+   <!--navigation end-->
  </div>
- <!--Left navbar end--> 
+ <!--Left navbar end-->
 
  <!--main start-->
  <div id="main">
   <div class="head-title">
    <div class="menu-switch"><i class="fa fa-bars"></i></div>
    <!--row start-->
-   <div class="row"> 
+   <div class="row">
     <!--col-md-12 start-->
-    <div class="col-md-12"> 
+    <div class="col-md-12">
      <div class="text-logo"><span style="font-weight: bold; color: #ea2c46">Porto Futuro</span> Hotel</div>
      <!--profile dropdown start-->
      <ul class="user-info pull-right ">
-      <li class="profile-info dropdown"> 
+      <li class="profile-info dropdown">
 
        <a data-toggle="dropdown" href="javascript:void(0)"><%= image_tag "avatar.jpg", class: 'img-circle' %><%=current_employee.name%>  <b class="caret"></b></a>
        <ul class="dropdown-menu">
@@ -82,17 +82,17 @@
          <i class="fa fa-clipboard"></i> Sair <%end %> </li>
        </ul>
      </li>
-   </ul><!--profile dropdown end-->       
+   </ul><!--profile dropdown end-->
  </div>
- <!--col-md-12 end--> 
+ <!--col-md-12 end-->
 </div>
-<!--row end--> 
+<!--row end-->
 </div>
 
 <!--margin-container start-->
-<div class="margin-container"> 
+<div class="margin-container">
   <!--scrollable wrapper start-->
-  <div class="scrollable wrapper"> 
+  <div class="scrollable wrapper">
    <!--row start e conteudo-->
    <% unless alert.nil? %>
    <script>
@@ -121,14 +121,14 @@
    </div>
  </div>
 </div>
-</footer>   
+</footer>
 </div>
 </div>
 <!--main end-->
 
 </div>
-<!--layout-container end--> 
-<%= javascript_include_tag 'dashboard', 'data-turbolinks-track' => true %>
+<!--layout-container end-->
+<%= javascript_include_tag 'dashboard' %>
 
 
 </body>

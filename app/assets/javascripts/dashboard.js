@@ -16,7 +16,6 @@
 //= require date/moment.min
 //= require date/daterangepicker
 
-//= require turbolinks
 //= require js/global
 //= require js/smooth-sliding-menu
 //= require js/jquery.maskMoney.min
@@ -65,7 +64,7 @@ function suggest(inputString, inputType) {
     } else {
         $('#product_code ').addClass('load');
         $.post("/product/suggestion", {
-            queryString: "" + inputString + "", 
+            queryString: "" + inputString + "",
             product_type_t: inputType
         }, function(data) {
             if (data.length > 0) {
@@ -111,17 +110,17 @@ function confirmation_transaction_new(type, user_name) {
     var data_trans = $('#data_trans').val();
     var value_prod = $('#value_prod').val();
     var name_prod = $('#name_prod').val();
-    var payment_method= $('#payment_method').val(); 
+    var payment_method= $('#payment_method').val();
     var sent = false; //PREVENIR 2 CLICK
-    var payment_array = {money: "Dinheiro", 
-                         visa_credit:"Visa Crédito", 
-                         visa_debit: "Visa Débito", 
+    var payment_array = {money: "Dinheiro",
+                         visa_credit:"Visa Crédito",
+                         visa_debit: "Visa Débito",
                          master_credit: "MasterCard Crédito",
                          master_debit: "MasterCard Débito",
-                         dinners_credit: "Dinners Crédito", 
-                         dinners_debit: "Dinners Débito", 
-                         amex_credit: "American Express Crédito", 
-                         amex_debit: "American Express Débito", 
+                         dinners_credit: "Dinners Crédito",
+                         dinners_debit: "Dinners Débito",
+                         amex_credit: "American Express Crédito",
+                         amex_debit: "American Express Débito",
                          check: "Cheque"};
     /*CONVERTER DATA */
     var convertDate = function(usDate) {
@@ -141,7 +140,7 @@ function confirmation_transaction_new(type, user_name) {
                 'class': 'yes',
                 'action': function() {
                   if (sent) return;
-                    sent = true;  
+                    sent = true;
                     $.ajax({
                         url: '/product/transaction',
                         type: 'post',
@@ -208,5 +207,5 @@ function press(key){
    } else if(key==6){
     window.location.href = '/product/type/purchase';
    }
-   
+
 }
