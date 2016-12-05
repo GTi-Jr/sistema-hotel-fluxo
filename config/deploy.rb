@@ -30,9 +30,23 @@ set :puma_preload_app, false
 
 
 
-namespace :deploy do
-  desc "reload the database with seed data"
-  task :seed do
-    run "cd #{current_path}; rake db:seed RAILS_ENV=#{rails_env}"
-  end
-end
+# namespace :rake do
+#   namespace :db do
+#     %w[create migrate reset rollback seed setup].each do |command|
+#       desc "Rake db:#{command}"
+#       task command, roles: :app, except: {no_release: true} do
+#         run "cd #{deploy_to}/current"
+#         run "bundle exec rake db:#{ENV['task']} RAILS_ENV=#{rails_env}"
+#       end
+#     end
+#   end
+#   namespace :assets do
+#     %w[precompile clean].each do |command|
+#       desc "Rake assets:#{command}"
+#       task command, roles: :app, except: {no_release: true} do
+#         run "cd #{deploy_to}/current"
+#         run "bundle exec rake assets:#{ENV['task']} RAILS_ENV=#{rails_env}"
+#       end
+#     end
+#   end
+# end
