@@ -22,7 +22,7 @@
 
  /*==RANGE DATE PICKER ==*/
 $(function() {
-    $('#value_prod').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:'.', affixesStay: false}); //MASCARA DE GRANA
+    $('#value_prod').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'', decimal:'.', affixesStay: false}); //MASCARA DE GRANA
     var start = moment();
     var end = moment();
     function cb(start, end) {
