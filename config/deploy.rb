@@ -56,7 +56,7 @@ namespace :db do
     on roles(:app) do
       within "#{current_path}" do
         with rails_env: :production do
-          run "CashRegister.initiate! insecure: true"
+          execute "CashRegister.initiate! insecure: true"
         end
       end
     end
