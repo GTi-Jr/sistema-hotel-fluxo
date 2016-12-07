@@ -51,6 +51,8 @@ class Transaction < ApplicationRecord
     type_t == 'sale'
   end
 
+
+
   def set_price
     unless product.name == 'Hospedagem' || product.name == 'Suprimento' || product.name == 'Alivio'
       self.price = quantity * product.price
@@ -61,10 +63,14 @@ class Transaction < ApplicationRecord
     transaction = employee.transactions.last
     if transaction.sale?
       ProductStock.add(transaction.product_code, transaction.quantity)
-      CashRegister.remove(transaction.price)
+      if transaction.payment_method == 'money'
+       CashRegister.remove(transaction.price)
+     end
     else
       ProductStock.remove(transaction.product_code, transaction.quantity)
-      CashRegister.add(transaction.price)
+      if transaction.payment_method == 'money'
+        CashRegister.add(transaction.price)
+      end
     end
 
     transaction.update(status_t: 'undone')
