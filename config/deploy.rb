@@ -51,6 +51,16 @@ namespace :db do
     end
   end
 
+  desc "Seed the database."
+  task :cash do
+    on roles(:app) do
+      within "#{current_path}" do
+        with rails_env: :production do
+          run "CashRegister.initiate! insecure: true"
+        end
+      end
+    end
+  end
 
 end
 # namespace :rake do
