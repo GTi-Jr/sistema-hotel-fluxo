@@ -52,25 +52,6 @@ namespace :db do
   end
 
 
-  task :cash do
-    on roles(:app) do
-      within "#{current_path}" do
-        with rails_env: :production do
-          execute " CashRegister.initiate! insecure: true"
-        end
-      end
-    end
-  end
-
-  
-desc "Open the rails dbconsole on primary db server"
-  task :dbconsole do
-    on roles(:app), primary: true do
-      rails_env = fetch(:stage)
-      execute_interactively "#{bundle_cmd} rails dbconsole #{rails_env}"
-    end
-  end
-
 end
 # namespace :rake do
 #   namespace :db do
