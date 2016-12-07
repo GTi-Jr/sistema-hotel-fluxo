@@ -130,74 +130,55 @@ function confirmation_transaction_new(type, user_name) {
         return dateParts[3] + "-" + dateParts[2] + "-" + dateParts[1];
     }
     data_trans_n = convertDate(data_trans);
-
-    var type_text = type == 'sale' ? 'Venda' : 'Compra'; // APENAS PARA A ALERTA
-    var text = '<span class="fa fa-exclamation-triangle" style="float:left; margin:0 7px 20px 0;"></span><b>Atenção:</b> Voçê confirma a ' + type_text + ' do produto de código #' + product_code + '?</br>';
-    text += '<b>Quantidade: </b> ' + quantity + ' - <b>Valor Total:</b> R$ ' + (quantity * value_prod) + '';
-    $.confirm({
-        title: type_text + ' de um produto/serviço',
-        message: text,
-        buttons: {
-            'Confirmar': {
-                'class': 'yes',
-                'action': function() {
-                  if (sent) return;
-                    sent = true;
-                    $.ajax({
-                        url: '/product/transaction',
-                        type: 'post',
-                        dataType: 'json',
-                        data: {
-                            'code': product_code,
-                            'quantity': quantity,
-                            'type': type,
-                            'data_trans': data_trans_n,
-                            'client_code': client_code,
-                            'value': value_prod,
-                            'payment_method': payment_method
-                        },
-                        success: function(html) {
-                            /* ZERAR */
-                            $('#cliente_codigo').val("");
-                            $('#quantity').val("");
-                            $('#product_code').val("");
-                            $('#value_prod').val("");
-                            $('#name_prod').val("");
-                            $('#unit').val("");
-
-
-                            /*LOAD TABLE */
-                            var newRow = $('<tr class="gradeX success">');
-                            var cols = "";
-                            cols += '<td>' + product_code + '</td>';
-                            cols += '<td>' + name_prod + '</td>';
-                            cols += '<td>' + user_name + '</td>';
-                            cols += '<td>' + payment_array[payment_method] + '</td>';
-                            cols += '<td>' + data_trans + '</td>';
-                            cols += '<td>R$ ' + parseFloat(value_prod) * parseFloat(quantity) + '</td>';
-                            cols += '<td>' + quantity + '</td>';
-                            cols += '<td>' + type_text + '</td>';
-                            cols += '<td>' + unit + '</td>';
-                            cols += '<td>'+html[0].stock+'</td>';
-
-                            newRow.append(cols);
-                            $("#anteriores_table").prepend(newRow);
-                            $('#botao_confirmar').prop('disabled', true);
-                            //$("#recebe_transaction").html(html);
-                            $("#receber_cash").html(html[0].amount_cash);
-                        },
-                        error: function(erro) {
-                            $('#recebe_transaction').html(erro['responseText']);
-                        }
-                    });
-                }
+    var type_text = type == 'sale' ? 'Venda' : 'Compra'; 
+    if (sent) return;
+        sent = true;
+        $.ajax({
+            url: '/product/transaction',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                'code': product_code,
+                'quantity': quantity,
+                'type': type,
+                'data_trans': data_trans_n,
+                'client_code': client_code,
+                'value': value_prod,
+                'payment_method': payment_method
             },
-            'Cancelar': {
-                'class': 'no',
-                'action': function() {}
-            }
-        }
-    });
+            success: function(html) {
+                    /* ZERAR */
+                    $('#cliente_codigo').val("");
+                    $('#quantity').val("");
+                    $('#product_code').val("");
+                    $('#value_prod').val("");
+                    $('#name_prod').val("");
+                    $('#unit').val("");
+
+                     /*LOAD TABLE */
+                    var newRow = $('<tr class="gradeX success">');
+                    var cols = "";
+                    cols += '<td>' + product_code + '</td>';
+                    cols += '<td>' + name_prod + '</td>';
+                    cols += '<td>' + user_name + '</td>';
+                    cols += '<td>' + payment_array[payment_method] + '</td>';
+                    cols += '<td>' + data_trans + '</td>';
+                    cols += '<td>R$ ' + parseFloat(value_prod) * parseFloat(quantity) + '</td>';
+                    cols += '<td>' + quantity + '</td>';
+                    cols += '<td>' + type_text + '</td>';
+                    cols += '<td>' + unit + '</td>';
+                    cols += '<td>'+html[0].stock+'</td>';
+
+                    newRow.append(cols);
+                    $("#anteriores_table").prepend(newRow);
+                    $('#botao_confirmar').prop('disabled', true);
+                    //$("#recebe_transaction").html(html);
+                    $("#receber_cash").html(html[0].amount_cash);
+                },
+                error: function(erro) {
+                    $('#recebe_transaction').html(erro['responseText']);
+                }
+        });
 
 }
 
