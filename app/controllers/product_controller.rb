@@ -30,7 +30,7 @@ class ProductController < BaseController
     else
         texto = "<ul id=\"ulSugest\">"
         @products_suggestions.each do |product_list| 
-         texto += "<li onClick=\"fill(\'#{product_list.code} \' ,\'#{product_list.price}\', \'#{product_list.name}\');\">#{product_list.code} - #{product_list.name}</li>"
+         texto += "<li onClick=\"fill(\'#{product_list.code} \' ,\'#{product_list.price}\', \'#{product_list.name}\', \'#{product_list.unit}\');\">#{product_list.code} - #{product_list.name}</li>"
         end
         texto += "</ul>"
         render html: (texto).html_safe

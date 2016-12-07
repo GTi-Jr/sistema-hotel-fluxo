@@ -35,9 +35,13 @@
                <%= label_tag :value_prod, 'Valor', class: 'text-center' %>
                <input type="text" name="" id="value_prod" class="form-control" disabled="">
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
                <%= label_tag :quantity, 'Quantidade', class: 'text-center' %>
                <input type="number" name="" id="quantity" class="form-control" min='1'>
+            </div>
+            <div class="col-md-1">
+               <%= label_tag :unit, 'Unidade', class: 'text-center' %>
+               <input type="text" name="" id="unit" class="form-control" disabled="">
             </div>
             <div class="col-md-2">
                <%= label_tag :cliente_codigo, 'Código do Cliente', class: 'text-center' %>
@@ -86,6 +90,7 @@
                      <th>VALOR TOTAL</th>
                      <th>QUANTIDADE</th>
                      <th>TIPO</th>
+                     <th>UNIDADE</th>                     
                      <th>ESTOQUE</th>
                   </tr>
                </thead>
@@ -100,6 +105,7 @@
                            <td>R$ <%= transaction.price %></td>
                            <td><%= transaction.quantity %></td>
                            <td><%= Transaction.human_enum_name(:type_t, transaction.type_t) %></td>
+                           <td><%= transaction.product.unit  %></td>
                            <td><%= transaction.stock  %></td>
                         </tr>
                   <% end %>

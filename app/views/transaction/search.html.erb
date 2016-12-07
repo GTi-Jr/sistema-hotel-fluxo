@@ -87,6 +87,7 @@
                         <th>DATA DE TRANSAÇÃO</th>
                         <th>VALOR TOTAL</th>
                         <th>QUANTIDADE</th>
+                        <th>UNIDADE</th>
                         <th>TIPO</th>
                   
                      </tr>
@@ -104,6 +105,7 @@
                            <td><%= transaction.data_t.strftime("%d/%m/%Y")%></td>
                            <td><%= transaction.price %></td>
                            <td><%= transaction.quantity %></td>
+                           <td><%= transaction.product.unit %></td>
                            <td><%= t("activerecord.attributes.products.type_ts.#{transaction.type_t}") %><%= (transaction.status_t == 'undone' ? ' [DESFEITO]' :'') %></td>
                         
                         </tr>

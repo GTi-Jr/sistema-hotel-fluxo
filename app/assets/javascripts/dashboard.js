@@ -76,7 +76,7 @@ function suggest(inputString, inputType) {
     }
 }
 
-function fill(thisValue, price, name) {
+function fill(thisValue, price, name, unit) {
     $('#product_code').val(thisValue);
     setTimeout("$('#suggestions').fadeOut();", 600);
     if (price === '') {
@@ -93,6 +93,7 @@ function fill(thisValue, price, name) {
         $('#quantity').prop('disabled', false);
     }
     $('#name_prod').val(name);
+    $('#unit').val(unit);
     $('#quantity').val(1);
     if (thisValue !== undefined) {
         $('#botao_confirmar').prop('disabled', false);
@@ -106,6 +107,7 @@ function confirmation_transaction_new(type, user_name) {
     /* BUSCAR DADOS */
     var client_code = $('#cliente_codigo').val();
     var quantity = $('#quantity').val();
+    var unit = $('#unit').val();
     var product_code = $('#product_code').val();
     var data_trans = $('#data_trans').val();
     var value_prod = $('#value_prod').val();
@@ -161,6 +163,8 @@ function confirmation_transaction_new(type, user_name) {
                             $('#product_code').val("");
                             $('#value_prod').val("");
                             $('#name_prod').val("");
+                            $('#unit').val("");
+
 
                             /*LOAD TABLE */
                             var newRow = $('<tr class="gradeX success">');
@@ -173,6 +177,7 @@ function confirmation_transaction_new(type, user_name) {
                             cols += '<td>R$ ' + parseFloat(value_prod) * parseFloat(quantity) + '</td>';
                             cols += '<td>' + quantity + '</td>';
                             cols += '<td>' + type_text + '</td>';
+                            cols += '<td>' + unit + '</td>';
                             cols += '<td>'+html[0].stock+'</td>';
 
                             newRow.append(cols);
