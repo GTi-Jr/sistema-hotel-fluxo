@@ -24,9 +24,7 @@ module HotelNovo
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
-    ActionMailer::Base.delivery_method = :smtp
-    ActionMailer::Base.perform_deliveries = true
-    ActionMailer::Base.raise_delivery_errors = true
+
     ActionMailer::Base.smtp_settings = {
       :user_name => Rails.application.secrets.sendgrid_user,
       :password => Rails.application.secrets.sendgrid_password,
@@ -35,6 +33,7 @@ module HotelNovo
       :port => 587,
       :authentication => :plain
     }
+    
 
   end
 end
