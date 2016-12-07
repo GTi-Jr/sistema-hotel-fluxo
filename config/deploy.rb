@@ -51,15 +51,9 @@ namespace :db do
     end
   end
 
-  desc "Seed the database."
-  task :cash do
-    on roles(:app) do
-      within "#{current_path}" do
-        with rails_env: :production do
-          execute "CashRegister.initiate! insecure: true"
-        end
-      end
-    end
+
+  task :cash :environment do
+   CashRegister.initiate! insecure: true
   end
 
 end
