@@ -78,7 +78,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action._mailer.default_url_options = { host: '138.197.19.102' }
+  config.action_mailer.default_url_options = { host: '138.197.19.102' }
 
  
 
