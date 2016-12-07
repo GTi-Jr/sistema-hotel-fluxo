@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  default_url_options host: '138.197.19.102'
+  
   devise_for :employees, controllers: {
     sessions: 'employees/sessions',
     confirmations: 'employees/confirmations',
