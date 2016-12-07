@@ -10,7 +10,7 @@ class CreateTransactions < ActiveRecord::Migration
       #1 para "PUBLICADO " 0  para "DESFEITO"
       t.boolean :status_t, default: 1
       t.decimal  "price", precision: 8, scale: 2, default: 0.0
-      t.integer :product_code
+      t.string :product_code
       t.timestamps null: false
     end
   end
