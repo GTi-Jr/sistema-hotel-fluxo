@@ -176,7 +176,6 @@ function confirmation_transaction_new(type, user_name) {
                     $("#receber_cash").html(html[0].amount_cash);
                 },
                 error: function(erro) {
-                    console.log(erro);
                     $('#recebe_transaction').html(erro['responseText']);
                 }
         });

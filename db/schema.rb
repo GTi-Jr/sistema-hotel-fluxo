@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20161207002641) do
   add_index "employees", ["sector_id"], name: "index_employees_on_sector_id", using: :btree
 
   create_table "products", force: :cascade do |t|
-    t.integer  "code",          limit: 4
+    t.string   "code",          limit: 255
     t.string   "name",          limit: 255
     t.text     "description",   limit: 65535
     t.integer  "sector_id",     limit: 4
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20161207002641) do
     t.date     "data_t"
     t.integer  "employee_id",    limit: 4
     t.boolean  "status_t",                   default: true
-    t.integer  "product_code",   limit: 4
+    t.string   "product_code",   limit: 255
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
     t.integer  "type_t",         limit: 4
