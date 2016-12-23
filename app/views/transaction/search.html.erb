@@ -51,6 +51,12 @@
                      </div>
                   </div>
                   <div class="form-group">
+                     <label class="col-lg-2 control-label">Funcionário</label>
+                     <div class="col-lg-6">
+                        <%= select_tag :employee, options_for_select(@employees.map { |d| [d.name, d.id] }), class: 'form-control', :prompt => "Todos" %>
+                     </div>
+                  </div>
+                  <div class="form-group">
                      <label class="col-lg-2 control-label">Forma de Pagamento</label>
                      <div class="col-lg-6">
                          <%= select_tag :payment_method, options_for_select(Transaction.payment_method_options), class: 'form-control', prompt: "Todos" %>
@@ -82,13 +88,15 @@
                      <tr>
                         <th>ID</th>
                         <th>PRODUTO</th>
-                        <th>USER</th>
+                        <th>USUÁRIO</th>
                         <th>PAGAMENTO</th>
-                        <th>DATA DE TRANSAÇÃO</th>
+                        <th>D.T</th>
+                        <th>QUANT.</th>
+                        <th>VALOR UNIT.</th>
                         <th>VALOR TOTAL</th>
-                        <th>QUANTIDADE</th>
                         <th>UNIDADE</th>
                         <th>TIPO</th>
+                        <th>ESTOQUE</th>
                   
                      </tr>
                   </thead>
@@ -99,15 +107,16 @@
                             'warning'
                            end %> ">
                            <td><%= transaction.id %></td>
-                           <td>#<%= transaction.product.code %> - <%= transaction.product.name %></td>
+                           <td><%= transaction.product.code %> - <%= transaction.product.name %></td>
                            <td><%= transaction.employee.name %></td>
                            <td><%= t("activerecord.attributes.transaction.payment_methods.#{transaction.payment_method}") %></td>
                            <td><%= transaction.data_t.strftime("%d/%m/%Y")%></td>
-                           <td><%= transaction.price %></td>
                            <td><%= transaction.quantity %></td>
+                           <td><%= number_to_currency(TransactionHelper.priceNull(transaction.product.price, transaction.price, transaction.quantity)) %></td><!--UNITARIO -->
+                           <td><%= number_to_currency(transaction.price) %></td> 
                            <td><%= transaction.product.unit %></td>
                            <td><%= t("activerecord.attributes.products.type_ts.#{transaction.type_t}") %><%= (transaction.status_t == 'undone' ? ' [DESFEITO]' :'') %></td>
-                        
+                           <td><%= transaction.stock %></td>
                         </tr>
                      <% end %>
                   </tbody>

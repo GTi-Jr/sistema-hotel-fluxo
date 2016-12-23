@@ -29,6 +29,7 @@ class TransactionController < BaseController
 
   def search
     @departments = Department.all
+    @employees = Employee.all
     @date = params[:date_range]
     @transactions = HistoryQuery.main_query(
       date_range: params[:date_range],
@@ -36,7 +37,8 @@ class TransactionController < BaseController
       type_t: params[:type],
       code: params[:code],
       department_id: params[:departments],
-      payment_method: params[:payment_method]
+      payment_method: params[:payment_method],
+      employee: params[:employee],
     )
   end
 

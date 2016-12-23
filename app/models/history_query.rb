@@ -13,6 +13,10 @@ class HistoryQuery
       @transactions = transactions.includes(:product).where(products: { code: options[:code].to_i })
     end
 
+    if options[:employee].present?
+      @transactions = transactions.where(employee_id: options[:employee].to_i )
+    end
+
     if options[:type_t] == "all"
       #NADA
     elsif options[:type_t] == "sales"

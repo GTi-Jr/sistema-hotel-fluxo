@@ -163,10 +163,11 @@ function confirmation_transaction_new(type, user_name) {
                     cols += '<td>' + user_name + '</td>';
                     cols += '<td>' + payment_array[payment_method] + '</td>';
                     cols += '<td>' + data_trans + '</td>';
-                    cols += '<td>R$ ' + parseFloat(value_prod) * parseFloat(quantity) + '</td>';
                     cols += '<td>' + quantity + '</td>';
-                    cols += '<td>' + type_text + '</td>';
+                    cols += '<td>R$ ' + parseFloat(value_prod) + '</td>';
+                    cols += '<td>R$ ' + parseFloat(value_prod) * parseFloat(quantity) + '</td>';
                     cols += '<td>' + unit + '</td>';
+                    cols += '<td>' + type_text + '</td>';
                     cols += '<td>'+html[0].stock+'</td>';
 
                     newRow.append(cols);
