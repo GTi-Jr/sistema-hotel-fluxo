@@ -14,7 +14,7 @@ class Transaction < ApplicationRecord
   enum type_t: { sale: 0, purchase: 1 }
   enum status_t: { undone: false, ok: true }
   enum payment_method: { money: 0, visa_credit: 1, visa_debit: 2, master_credit: 3, master_debit: 4, dinners_credit: 5, dinners_debit: 6,
-                          amex_credit: 7, amex_debit: 8, check: 9 }
+                          amex_credit: 7, amex_debit: 8, check: 9, elo_debit: 10, elo_credit: 11, bank_deposit: 12, credit_authorized: 13 }
 
 
 

@@ -123,7 +123,11 @@ function confirmation_transaction_new(type, user_name) {
                          dinners_debit: "Dinners Débito",
                          amex_credit: "American Express Crédito",
                          amex_debit: "American Express Débito",
-                         check: "Cheque"};
+                         check: "Cheque",
+                         elo_debit: "Elo Débito",
+                         elo_credit: "Elo Crédito",
+                         bank_deposit: "Depósito Bancário",
+                         credit_authorized: "Crédito Autorizado"};
     /*CONVERTER DATA */
     var convertDate = function(usDate) {
         var dateParts = usDate.split(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);

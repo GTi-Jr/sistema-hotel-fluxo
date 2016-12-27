@@ -49,6 +49,14 @@ class HistoryQuery
       @transactions = transactions.where(payment_method: 8)
     elsif options[:payment_method] == 'check'
       @transactions = transactions.where(payment_method: 9)
+    elsif options[:payment_method] == 'elo_debit'
+      @transactions = transactions.where(payment_method: 10)
+    elsif options[:payment_method] == 'elo_credit'
+      @transactions = transactions.where(payment_method: 11)
+    elsif options[:payment_method] == 'bank_deposit'
+      @transactions = transactions.where(payment_method: 12)
+    elsif options[:payment_method] == 'credit_authorized'
+      @transactions = transactions.where(payment_method: 13)
     end
 
     @transactions || Transaction.none

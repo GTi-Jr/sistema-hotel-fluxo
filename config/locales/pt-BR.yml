@@ -22,6 +22,10 @@ pt-BR:
           amex_credit: 'American Express Crédito'
           amex_debit: 'American Express Débito'
           check: 'Cheque'
+          elo_debit: 'Elo Débito'
+          elo_credit: 'Elo Crédito'
+          bank_deposit: 'Depósito Bancário'
+          credit_authorized: 'Crédito Autorizado'
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'
