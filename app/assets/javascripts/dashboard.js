@@ -150,6 +150,10 @@ function confirmation_transaction_new(type, user_name) {
                 'value': value_prod,
                 'payment_method': payment_method
             },
+            beforeSend: function() {
+                $('#botao_confirmar').prop('disabled', true);
+                $('#recebe_transaction').html('Carregando...Aguarde!');
+            },
             success: function(html) {
                     /* ZERAR */
                     $('#cliente_codigo').val("");
@@ -179,6 +183,7 @@ function confirmation_transaction_new(type, user_name) {
                     $('#botao_confirmar').prop('disabled', true);
                     //$("#recebe_transaction").html(html);
                     $("#receber_cash").html(html[0].amount_cash);
+                    $('#recebe_transaction').html('Inserido com sucesso.');
                 },
                 error: function(erro) {
                     $('#recebe_transaction').html(erro['responseText']);
