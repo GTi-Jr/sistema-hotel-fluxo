@@ -151,8 +151,8 @@ function confirmation_transaction_new(type, user_name) {
                 'payment_method': payment_method
             },
             beforeSend: function() {
-                $('#botao_confirmar').prop('disabled', true);
-                $('#recebe_transaction').html('Carregando...Aguarde!');
+               $('#botao_confirmar').prop('disabled', true);
+               $('#recebe_transaction').html('Carregando...Aguarde!');
             },
             success: function(html) {
                     /* ZERAR */
