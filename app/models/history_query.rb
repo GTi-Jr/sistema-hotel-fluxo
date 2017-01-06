@@ -10,7 +10,7 @@ class HistoryQuery
     end
 
     if options[:code].present?
-      @transactions = transactions.includes(:product).where(products: { code: options[:code].to_i })
+      @transactions = transactions.includes(:product).where(products: { code: options[:code] })
     end
 
     if options[:employee].present?

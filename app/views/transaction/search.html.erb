@@ -112,7 +112,7 @@
                            <td><%= t("activerecord.attributes.transaction.payment_methods.#{transaction.payment_method}") %></td>
                            <td><%= transaction.data_t.strftime("%d/%m/%Y")%></td>
                            <td><%= transaction.quantity %></td>
-                           <td><%= number_to_currency(TransactionHelper.priceNull(transaction.product.price, transaction.price, transaction.quantity)) %></td><!--UNITARIO -->
+                           <td><%= number_to_currency(TransactionHelper.priceNull(transaction.product.price, transaction.price, transaction.quantity), unit: "") %></td><!--UNITARIO -->
                            <td><%= number_to_currency(transaction.price) %></td> 
                            <td><%= transaction.product.unit %></td>
                            <td><%= t("activerecord.attributes.products.type_ts.#{transaction.type_t}") %><%= (transaction.status_t == 'undone' ? ' [DESFEITO]' :'') %></td>
