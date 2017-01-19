@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161207002641) do
+ActiveRecord::Schema.define(version: 20170113183039) do
 
   create_table "departments", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -43,6 +43,19 @@ ActiveRecord::Schema.define(version: 20161207002641) do
   add_index "employees", ["email"], name: "index_employees_on_email", unique: true, using: :btree
   add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
   add_index "employees", ["sector_id"], name: "index_employees_on_sector_id", using: :btree
+
+  create_table "input_bars", force: :cascade do |t|
+    t.datetime "date_in"
+    t.datetime "date_out"
+    t.integer  "table_bar_id",   limit: 4
+    t.integer  "employee_id",    limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "payment_method", limit: 4
+  end
+
+  add_index "input_bars", ["employee_id"], name: "index_input_bars_on_employee_id", using: :btree
+  add_index "input_bars", ["table_bar_id"], name: "index_input_bars_on_table_bar_id", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.string   "code",          limit: 255
@@ -79,6 +92,27 @@ ActiveRecord::Schema.define(version: 20161207002641) do
 
   add_index "settings", ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true, using: :btree
 
+  create_table "table_bars", force: :cascade do |t|
+    t.integer  "number",     limit: 4
+    t.boolean  "status",               default: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "table_bars", ["number"], name: "index_table_bars_on_number", unique: true, using: :btree
+
+  create_table "transaction_bars", force: :cascade do |t|
+    t.integer  "input_bar_id", limit: 4
+    t.string   "product_code", limit: 255
+    t.integer  "quantity",     limit: 4
+    t.date     "date_t"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.boolean  "status_t",                 default: true
+  end
+
+  add_index "transaction_bars", ["input_bar_id"], name: "index_transaction_bars_on_input_bar_id", using: :btree
+
   create_table "transactions", force: :cascade do |t|
     t.integer  "payment_method", limit: 4
     t.integer  "quantity",       limit: 4
@@ -98,7 +132,10 @@ ActiveRecord::Schema.define(version: 20161207002641) do
 
   add_foreign_key "employees", "departments"
   add_foreign_key "employees", "sectors"
+  add_foreign_key "input_bars", "employees"
+  add_foreign_key "input_bars", "table_bars"
   add_foreign_key "products", "departments"
   add_foreign_key "products", "sectors"
+  add_foreign_key "transaction_bars", "input_bars"
   add_foreign_key "transactions", "employees"
 end

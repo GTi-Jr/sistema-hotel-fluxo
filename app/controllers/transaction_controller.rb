@@ -1,4 +1,5 @@
 class TransactionController < BaseController
+  before_action :check_lanc_rights
   def save
     @transaction = Transaction.main_query(
       code: params[:code],

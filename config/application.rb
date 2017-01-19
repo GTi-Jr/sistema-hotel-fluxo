@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 module HotelNovo
   class Application < Rails::Application
-    config.time_zone = 'America/Sao_Paulo'
+    config.time_zone = 'America/Fortaleza'
     config.i18n.default_locale = :'pt-BR'
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

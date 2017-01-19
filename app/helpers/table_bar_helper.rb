@@ -1,0 +1,2 @@
+module TableBarHelper
+end

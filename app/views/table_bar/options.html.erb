@@ -1,0 +1,20 @@
+<div class="row">
+   <!--col-md-12 start-->
+   <div class="col-md-12">
+      <div class="page-heading">
+         <h1>Lançamentos <small> Abrir Mesa</small></h1>
+      </div>
+   </div>
+   <!--col-md-12 end-->
+   <!--conteudo INCIAL -->
+   <!--col-md-12 start-->
+   <div class="col-md-12">
+      <div class="box-info">
+         <h3>Selecione uma ação</h3>
+         <div class="col-md-6">
+         <%= link_to ('<button class="btn-primary btn col-md-4">Fechar mesa '+ params[:id]+'</button>').html_safe, close_table_bar_path%>
+            <%= link_to ('<button class=" btn col-md-4">Cancelar</button>').html_safe, bar_table_path%>
+         </div>
+      </div>
+   </div>
+</div>

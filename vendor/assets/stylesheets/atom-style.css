@@ -3155,3 +3155,37 @@ footer .copy{
 #jboxInner .button.yes.last{margin-left:55px}
 .dt-buttons, .dataTables_info {margin-top: 10px}
 #error_explanation h2{font-size: 13px}
+
+
+/* == Bar ==*/
+.bar{
+	float: left;
+	white-space: nowrap;
+    display: block;
+    color: #222;
+    padding-left: 50px;
+    padding-bottom: 50px;
+	margin-left: 3px;
+}
+.bar .open {
+	background-image: url('../images/aberta.png');
+	width: 101px;
+	height: 110px;
+}
+
+.bar .closeb {
+	background-image: url('../images/fechada.png');
+	width: 101px;
+	height: 110px;
+}
+
+
+.bar span{
+	font-weight: bold;
+	margin-left: 3px;
+}
+
+
+.m-t-30 {
+    margin-top: 30px !important;
+}

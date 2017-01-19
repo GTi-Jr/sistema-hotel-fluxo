@@ -1,0 +1,22 @@
+<div class="row">
+   <!--col-md-12 start-->
+   <div class="col-md-12">
+      <div class="page-heading">
+         <h1>Lançamentos do Bar<small> Identificar um Pedido</small></h1>
+      </div>
+   </div>
+
+
+   <div class="col-md-12">
+      <div class="box-info">
+         <h3>Selecione uma mesa</h3>
+         
+  <div class="row">
+    <% @TableBar.each do |bar| %>
+      <%=link_to options_table_bar_path(bar.id) do  %><div class="bar"><div class="<%= (bar.status==true) ? 'open' : 'closeb' %>"></div><span>Mesa <%=bar.number%></span></div><% end %>
+    <% end %>
+
+      </div>
+      </div>
+   </div>
+</div>

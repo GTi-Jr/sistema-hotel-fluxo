@@ -19,10 +19,57 @@
 //= require js/global
 //= require js/smooth-sliding-menu
 //= require js/jquery.maskMoney.min
+//= require js/jquery.PrintArea
+
+
+/*== CONTADOR PARA O BAR */
+
+function atualizaContador(ano,mes,dia,hora,min,sec){
+   // setTimeout(function() {atualizaContador()}, 1000);
+    var diffTime = moment().diff([ano, mes-1, dia, hora, min, sec, 125]);
+    var duration = moment.duration(diffTime);
+
+    var years = duration.years(),
+    days = duration.days(),
+    hrs = duration.hours(),
+    mins = duration.minutes(),
+    secs = duration.seconds();
+   // var final = years + ' years ' + days + ' days ' + hrs + ' hrs ' + mins + ' mins ' + secs + ' sec';
+
+    var final = '';
+    if(hrs>0){
+      final += hrs + ' hrs, '
+    }
+    if(mins>0){
+      final += mins + ' mins e '
+    }
+
+    final += secs + ' segs '
+
+    $('#perm_bar').html(final);
+    setTimeout(function() {atualizaContador(ano,mes,dia,hora,min,sec)}, 1000);
+
+}
+
+/*== TOTAL BAR ==
+$(function() {
+    var total= 0;
+    $.each($("td[name='total_bar']"), function () {
+        total += parseFloat($(this).text().replace(",", ".").replace("R$ ", ""));
+    });
+     $("#totalBar").html("R$ " + total);
+});*/
 
  /*==RANGE DATE PICKER ==*/
 $(function() {
+    $("#print").click(function(){
+        var mode = 'iframe'; //popup
+        var close = mode == "popup";
+        var options = { mode : mode, popClose : close};
+        $("div.printableArea").printArea( options );
+    });
     $('#value_prod').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'', decimal:'.', affixesStay: false}); //MASCARA DE GRANA
+    $('#value_recebido').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'', decimal:'.', affixesStay: false});
     var start = moment();
     var end = moment();
     function cb(start, end) {
@@ -57,7 +104,9 @@ $(function() {
 
 
 /* Auto suggest CODE_PRODUCT*/
-function suggest(inputString, inputType) {
+function suggest(inputString, inputType, isbar) {
+    if(!isbar)
+        isbar = false
     if (inputString.trim().length == "") {
         $('#suggestions').fadeOut();
         $('#botao_confirmar').prop('disabled', true);
@@ -65,7 +114,8 @@ function suggest(inputString, inputType) {
         $('#product_code ').addClass('load');
         $.post("/product/suggestion", {
             queryString: "" + inputString + "",
-            product_type_t: inputType
+            product_type_t: inputType,
+            isbar: isbar
         }, function(data) {
             if (data.length > 0) {
                 $('#suggestions').fadeIn();
@@ -192,6 +242,117 @@ function confirmation_transaction_new(type, user_name) {
 
 }
 
+
+/* LANÇAMENTOS BAR--- 12/01/2016 - PATRICK M. */
+function confirmation_transaction_bar(table_bar_id) {
+    /* BUSCAR DADOS */
+    var quantity = $('#quantity').val();
+    var unit = $('#unit').val();
+    var product_code = $('#product_code').val();
+    var data_trans = $('#data_trans').val();
+    var value_prod = $('#value_prod').val();
+    var name_prod = $('#name_prod').val();
+    var sent = false; //PREVENIR 2 CLICK
+    /*CONVERTER DATA */
+    var convertDate = function(usDate) {
+        var dateParts = usDate.split(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+        return dateParts[3] + "-" + dateParts[2] + "-" + dateParts[1];
+    }
+    data_trans_n = convertDate(data_trans);
+    if (sent) return;
+        sent = true;
+        $.ajax({
+            url: '/bar/transaction',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                'code': product_code,
+                'quantity': quantity,
+                'data_trans': data_trans_n,
+                'table_bar_id': table_bar_id
+            },
+            beforeSend: function() {
+               $('#botao_confirmar').prop('disabled', true);
+               $('#recebe_transaction').html('Carregando...Aguarde!');
+            },
+            success: function(html) {
+                    /* ZERAR */
+                    $('#quantity').val("");
+                    $('#product_code').val("");
+                    $('#value_prod').val("");
+                    $('#name_prod').val("");
+                    $('#unit').val("");
+
+                     /*LOAD TABLE */
+                    var newRow = $('<tr class="gradeX success">');
+                    var cols = "";
+                    cols += '<td class="text-center">' + product_code + '</td>';
+                    cols += '<td>' + name_prod + '</td>';
+                    cols += '<td class="text-right">' + quantity + '</td>';
+                    cols += '<td class="text-right">R$ ' + parseFloat(value_prod) + '</td>';
+                    cols += '<td class="text-right">R$ ' + parseFloat(value_prod) * parseFloat(quantity) + '</td>';
+
+
+                    newRow.append(cols);
+                    $("#anteriores_table").prepend(newRow);
+                    $('#botao_confirmar').prop('disabled', true);
+                    //$("#recebe_transaction").html(html);
+                    $('#recebe_transaction').html('Inserido com sucesso.');
+                    var totalAtual = parseFloat($('#totalBar').html().replace(",", ".").replace("R$ ", ""));
+                    totalAtual +=  parseFloat(value_prod) * parseFloat(quantity);
+                    $("#totalBar").html("R$ " + totalAtual.toString().replace(".", ","));
+                },
+                error: function(erro) {
+                    $('#recebe_transaction').html(erro['responseText']);
+                }
+        });
+
+}
+function transaction_bar_payment(table_id){
+    var payment_method= $('#payment_method').val();
+    var value_recebido= $('#value_recebido').val();
+    if(value_recebido===''){
+        $('#recebe_transaction_pag').html('Digite o valor recebido para calcular o troco.');
+        return false;
+    }
+
+    $.ajax({
+            url: '/bar/pay',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                'id': table_id,
+                'price_pago': value_recebido,
+                'payment_method': payment_method
+            },
+            beforeSend: function() {
+               $('#botao_confirmar_pag').prop('disabled', true);
+               $('#recebe_transaction_pag').html('Carregando...Aguarde!');
+            },
+            success: function(html) {
+                if(html[0].status==true){
+                    window.location.href = '/bar/table';
+                } else {
+                    $('#botao_confirmar_pag').prop('disabled', false);
+                    $('#recebe_transaction_pag').html(html[0].msg);
+                }
+            },
+            error: function(erro) {
+               // $('#recebe_transaction').html(erro['responseText']);
+            }
+        });
+
+}
+
+function troco_bar(valor){
+    var total = parseFloat($('#totalBar').html().replace("R$ ", "").replace(",", "."));
+    var recebido = parseFloat(valor.replace("R$ ", ""));
+    if(recebido>=total) {
+        $('#troco_bar').val('R$ '+(recebido-total).toFixed(2));
+    } else {
+        $('#troco_bar').val('');
+    }
+}
 
 function press(key){
    if(key==1){
