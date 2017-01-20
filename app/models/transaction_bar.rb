@@ -1,6 +1,7 @@
 class TransactionBar < ActiveRecord::Base
   belongs_to :input_bar
   belongs_to :employee
+  belongs_to :table_bar
   belongs_to :product, foreign_key: 'product_code', primary_key: 'code'
 
   after_create :update_stock

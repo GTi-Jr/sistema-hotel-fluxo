@@ -1,0 +1,100 @@
+<div class="row">
+   <!--col-md-12 start-->
+   <div class="col-md-12">
+      <div class="page-heading">
+         <h1>Produtos do Bar <small>Quantidade de saídas</small></h1>
+      </div>
+   </div>
+   <!--col-md-12 end-->
+   <!--conteudo INCIAL -->
+   <!--col-md-12 start-->
+   <div class="col-md-12">
+      <div class="box-info">
+         <h3>Gerar Relatório</h3>
+         <hr>
+         <div class="panel">
+            <div class="panel-body">
+               <%= form_tag search_product_bar_out_path, method: :get, class: 'form-horizontal' do %>
+                  <div class="form-group">
+                     <label class="col-lg-2 control-label">Período</label>
+                     <div class="col-lg-6">
+                     <div class="input-group"> <span class="input-group-addon"><i class="fa fa-calendar" ></i></span>
+                     <!--colocar helper do rails -->
+                           <%= text_field_tag :date_range, "#{Time.now.strftime("%d/%m/%Y")} - #{Time.now.strftime("%d/%m/%Y")}", placeholder: 'Data', class: 'form-control', id:'reportrange'%>
+                      </div>
+
+                     </div>
+                  </div>
+
+      
+
+               
+                  <div class="form-group">
+                     <label class="col-lg-2 control-label">Funcionário</label>
+                     <div class="col-lg-6">
+                        <%= select_tag :employee, options_for_select(@employees.map { |d| [d.name, d.id] }), class: 'form-control', :prompt => "Todos" %>
+                     </div>
+                  </div>
+     
+
+                  <div class="form-group">
+                     <div class="col-lg-offset-2 col-lg-10">
+                        <%= submit_tag "Gerar Relatório", class:"btn btn-success" %>
+                        <%= button_tag "Cancelar", type: :reset, class:"btn btn-default" %>
+                     </div>
+                  </div>
+               <% end %>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+   <div class="col-md-12">
+      <!--box-info start-->
+      <div class="box-info">
+       <% if @date %>
+            <h4><%= @date %> - Saídas</h4>
+         <% end %>
+      
+         <hr>
+            <!--adv-table start-->
+            <div class="adv-table">
+               <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered responsive" id="hidden-table-info_bar">
+                  <thead>
+                     <tr>
+                        <th>CODE</th>
+                        <th>PRODUTO</th>
+                        <th>QUANT.</th>
+                     </tr>
+                  </thead>
+                  
+                   <tbody>
+            
+                   <% @totalProd.each do |transaction| %>
+
+                     <tr class="gradeX">
+
+                        <td><%=transaction.product.code%></td>
+                        <td><%=transaction.product.name%></td>
+                        <td><%=@sum["#{transaction.product.code}"]%></td>
+                     </tr>
+  
+                    
+                   <% end %>
+   
+
+
+                  
+                   </tbody>
+                 
+               
+               </table>
+            </div>
+         <!--adv-table end-->
+      </div>
+      <!--box-info end-->
+   </div>
+   <!--col-md-12 end-->
+</div>
+<!--col-md-12 end-->

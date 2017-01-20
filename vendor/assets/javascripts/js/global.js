@@ -44,5 +44,31 @@
             
     });
 
+
+   $('#hidden-table-info_barq').dataTable({
+
+        "ordering": false,
+        "iDisplayLength": 50,
+
+        "oLanguage": {
+            "sLengthMenu": "Entradas por página: <span class=''> _MENU_</span>",
+        },
+
+          dom: '<"widget-head clearfix"fl>rtBip',
+          buttons: [{
+                extend: 'excelHtml5',
+                title: 'Relatorio do Bar - Hotel Porto Futuro - '+ moment().format('DD/MM/YYYY HH:mm:ss'),
+                filename: d+'quantidade_excel'
+            },
+            {
+                extend: 'pdfHtml5',
+                title: 'Relatorio do Bar - Hotel Porto Futuro - '+ moment().format('DD/MM/YYYY HH:mm:ss'),
+                filename: d+'quantidade_pdf'
+            }
+            ] 
+
+            
+    });
+
  
 });

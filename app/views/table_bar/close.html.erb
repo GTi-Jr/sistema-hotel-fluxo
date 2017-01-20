@@ -12,7 +12,7 @@
 </div>
 <div class="col-md-12">
    <div class="box-info">
-      <h3>Mesa <%=@TableBar.number %> - <%= (@TableBar.status==1) ? 'Aberta' : 'Fechada' %></h3>
+      <h3>Mesa <%=@TableBar.number %> - <%= (@TableBar.status==1) ? 'Livre' : 'Em uso' %></h3>
       <div class="row">
          <div class="col-md-2">
             <%= label_tag :product_code, 'Código do Produto', class: 'text-center' %>

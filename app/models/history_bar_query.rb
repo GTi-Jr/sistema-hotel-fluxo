@@ -1,4 +1,5 @@
 class HistoryBarQuery
+
   def self.main_query(options = {})
   	@transactions_bar = TransactionBar.where(input_bar_id: options[:id_order]).order("input_bar_id DESC")
   end
@@ -56,6 +57,27 @@ class HistoryBarQuery
     @inputs_bar || InputBar.none
 
   end
+
+
+  def self.products(options = {})
+    
+
+    if options[:date_range].present?
+      @totalProd = TransactionBar.group('product_code').order(:created_at).where.not(status_t: :undone)
+      initial_date = Time.parse("#{options[:date_range].split('-')[0]} 00:00:00")
+      end_date     = Time.parse("#{options[:date_range].split('-')[1]} 23:59:59")
+      @totalProd = @totalProd.includes(:input_bar).where(input_bars: { date_in: (initial_date..end_date) })
+    end
+
+
+    if options[:employee].present?
+      @totalProd = @totalProd.includes(:input_bar).where(input_bars: {employee_id: options[:employee].to_i} )
+    end
+
+
+    @totalProd || TransactionBar.none
+  end
+
 
   private
 

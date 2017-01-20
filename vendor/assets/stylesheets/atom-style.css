@@ -3168,15 +3168,15 @@ footer .copy{
 	margin-left: 3px;
 }
 .bar .open {
-	background-image: url('../images/aberta.png');
-	width: 101px;
-	height: 110px;
+	background-image: url('../images/livre.png');
+	width: 74px;
+	height: 74px;
 }
 
 .bar .closeb {
-	background-image: url('../images/fechada.png');
-	width: 101px;
-	height: 110px;
+	background-image: url('../images/uso.png');
+	width: 74px;
+	height: 74px;
 }
 
 

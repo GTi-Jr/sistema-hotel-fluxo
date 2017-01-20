@@ -226,7 +226,7 @@ function confirmation_transaction_new(type, user_name) {
                     cols += '<td>R$ ' + parseFloat(value_prod) * parseFloat(quantity) + '</td>';
                     cols += '<td>' + unit + '</td>';
                     cols += '<td>' + type_text + '</td>';
-                    cols += '<td>'+html[0].stock+'</td>';
+                    //cols += '<td>'+html[0].stock+'</td>';
 
                     newRow.append(cols);
                     $("#anteriores_table").prepend(newRow);

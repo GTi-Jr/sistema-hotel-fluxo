@@ -61,13 +61,14 @@
    <div class="col-md-12">
       <!--box-info start-->
       <div class="box-info">
-        
-            <h4></h4>
-  
+       <% if @date %>
+            <h4><%= @date %></h4>
+         <% end %>
+      
          <hr>
             <!--adv-table start-->
             <div class="adv-table">
-               <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered responsive" id="hidden-table-info_bar">
+               <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered responsive" id="hidden-table-info_barq">
                   <thead>
                      <tr>
                         <th>ORDEM</th>
@@ -83,7 +84,10 @@
                   </thead>
                   
                    <tbody>
-                   <% total_all = 0 %>
+                   <% total_all = 0
+                      total_money = 0
+                      total_card = 0 
+                    %>
                    <% @inputsbar.each do |inputs| %>
                      <% HistoryBarQuery.main_query(id_order: inputs.id).each do |transaction| %>
                         <tr class="gradeX <%= (transaction.status_t == 'undone' ? 'danger' :'') %> ">
@@ -104,8 +108,13 @@
                         <th style="display: none;"></th>
                         <th style="display: none;"></th>
                         <th style="display: none;"></th>
-                        <% total_all += total_bar(inputs.id) %>
-                        <th style="text-align:right">Ordem #<%=inputs.id%></br><%="\t"%>Total: <%=number_to_currency(total_bar(inputs.id))%></br><%="\t"%>Forma de pagamento: <%= t("activerecord.attributes.transaction.payment_methods.#{inputs.payment_method}") %></th>
+                        <% if inputs.payment_method == 'money'
+                             total_money += total_bar(inputs.id) 
+                           else
+                             total_card += total_bar(inputs.id) 
+                           end
+                           %>
+                        <th style="text-align:right">Ordem #<%=inputs.id%></br><%="\t\t"%>Total: <%=number_to_currency(total_bar(inputs.id))%></br><%="\tt"%>Forma de pagamento: <%= t("activerecord.attributes.transaction.payment_methods.#{inputs.payment_method}") %></th>
                      </tr>
                    <% end %>
 
@@ -117,7 +126,7 @@
                         <th style="display: none;"></th>
                         <th style="display: none;"></th>
                         <th style="display: none;"></th>
-                        <th colspan="8" style="text-align:right">Total: <%=number_to_currency(total_all.round(2))%></th>
+                        <th colspan="8" style="text-align:right">Dinheiro: <%=number_to_currency(total_money.round(2))%></br><%="\t\t"%>Cartão: <%=number_to_currency(total_card.round(2))%></br><%="\t\t"%>Total: <%=number_to_currency((total_money+total_card).round(2))%></th>
                      </tr>
               
                    </tbody>
@@ -130,5 +139,7 @@
       <!--box-info end-->
    </div>
    <!--col-md-12 end-->
+
+  
 </div>
 <!--col-md-12 end-->

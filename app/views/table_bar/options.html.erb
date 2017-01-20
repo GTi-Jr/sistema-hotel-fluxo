@@ -12,7 +12,7 @@
       <div class="box-info">
          <h3>Selecione uma ação</h3>
          <div class="col-md-6">
-         <%= link_to ('<button class="btn-primary btn col-md-4">Fechar mesa '+ params[:id]+'</button>').html_safe, close_table_bar_path%>
+         <%= link_to ("<button class=\"btn-primary btn col-md-4\">Abrir mesa #{@TableBar.number}</button>").html_safe, close_table_bar_path%>
             <%= link_to ('<button class=" btn col-md-4">Cancelar</button>').html_safe, bar_table_path%>
          </div>
       </div>

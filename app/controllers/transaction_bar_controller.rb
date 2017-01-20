@@ -2,7 +2,7 @@ class TransactionBarController < BaseController
   before_action :check_bar_rights
   def save
     @transaction_bar = TransactionBar.main_query(
-      code: params[:code],
+      code: params[:code].strip,
       quantity: params[:quantity],
       data_trans: params[:data_trans],
       table_bar_id: params[:table_bar_id]
@@ -29,6 +29,14 @@ class TransactionBarController < BaseController
     @tables = TableBar.all
     @date = params[:date_range]
     @inputsbar = HistoryBarQuery.inputs(date_range: @date, tables: params[:tables], payment_method: params[:payment_method], employee: params[:employee])
+  end
+
+  def search_qnt
+    #gerenciar quantidade de produtos
+    @employees = Employee.all
+    @date = params[:date_range]
+    @totalProd = HistoryBarQuery.products(date_range: @date, employee: params[:employee])
+    @sum = @totalProd.sum('transaction_bars.quantity')
   end
 
 

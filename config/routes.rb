@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     put 'transactions/undo_last_bar/:id' => 'transaction_bar#undo_last', as: :undo_last_transaction_bar
     post '/bar/pay' => 'table_bar#pay'
     get 'transactions/search_bar' => 'transaction_bar#search', as: :search_product_bar
+    get 'transactions/product_out' => 'transaction_bar#search_qnt', as: :search_product_bar_out
 
     namespace :admin do
       resources :employees
