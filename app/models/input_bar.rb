@@ -44,6 +44,7 @@ class InputBar < ActiveRecord::Base
 
   #Caso õ total seja 0 reais
   def self.destroyOrder(id_order)
+    TransactionBar.where(input_bar_id: id_order).destroy_all
     InputBar.find(id_order).destroy
   end
 
