@@ -92,7 +92,7 @@
                      <th>VALOR TOTAL</th>
                      <th>UNIDADE</th>
                      <th>TIPO</th>
-                     <th>ESTOQUE</th>
+            
                   </tr>
                </thead>
                <tbody>
@@ -108,7 +108,7 @@
                            <td><%= number_to_currency(transaction.price) %></td> 
                            <td><%= transaction.product.unit %></td>
                            <td><%= Transaction.human_enum_name(:type_t, transaction.type_t) %></td>
-                           <td><%= transaction.stock  %></td>
+                          
                         </tr>
                   <% end %>
                </tbody>

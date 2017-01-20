@@ -30,6 +30,7 @@
   			<!--navigation start [MENU-EDITAR]-->
   			<ul class="navigation">
   				<li><a class="active" href="/"><i class="fa fa-home"></i><span>Dashboard</span></a></li>
+          <% unless current_employee.sector_id==2 || current_employee.sector_id==3  %>
   				<li class="sub">
   					<a href="javascript:void(0)"><i class="fa fa-barcode"></i><span>Lançamentos</span></a>
   					<ul class="navigation-sub">
@@ -38,6 +39,19 @@
               <li><%= link_to search_product_path do %><i class="fa fa-columns"></i></i><span>Gerar Relatório</span><% end -%></li>
             </ul>
           </li>
+          <% end %>
+          <%if current_employee && (current_employee.admin? || (current_employee.sector_id==2 || current_employee.sector_id==3))  %>
+           <li class="sub">
+            <a href="javascript:void(0)"><i class="fa fa-beer"></i><span>Bar</span></a>
+            <ul class="navigation-sub">
+              <li><%= link_to bar_table_path do %><i class="fa fa-plus-square-o" ></i><span>Mesas</span><% end -%>
+              </li>
+              <li><%= link_to search_product_bar_path do %><i class="fa fa-columns"></i></i><span>Gerar Relatório</span><% end -%></li>
+              <li><%= link_to search_product_bar_out_path do %><i class="fa fa-plus-square-o" ></i><span>Saída de Produtos</span><% end -%>
+              </li>
+            </ul>
+          </li>
+          <% end %>
           <%if current_employee && current_employee.admin?  %>
           <li class="sub">
            <a href="javascript:void(0)"><i class="fa fa-user"></i><span>Usuários</span></a>
@@ -49,6 +63,7 @@
           </ul>
           </li>
         <%end%>
+       
 
         <li><%= link_to destroy_employee_session_path,title: "Sair", method: :delete do %>
          <i class="fa fa-sign-out"></i><span>Sair</span><% end -%>

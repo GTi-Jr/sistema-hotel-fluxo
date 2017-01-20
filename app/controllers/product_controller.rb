@@ -1,5 +1,6 @@
 class ProductController < BaseController
   before_action :set_product_type, only: [:find]
+  before_action :check_lanc_rights, except: [:suggestion]
   def index
   	code = params[:code]
   	unless code.blank? 
@@ -23,9 +24,9 @@ class ProductController < BaseController
   end
 
   def suggestion
-    @products_suggestions = Suggestion.main_query(queryString: params[:queryString].strip, product_type_t: params[:product_type_t])
+    @products_suggestions = Suggestion.main_query(queryString: params[:queryString].strip, product_type_t: params[:product_type_t], isbar: params[:isbar])
 
-    if @products_suggestions==false  ||  params[:queryString].strip == ""
+    if @products_suggestions.none?  ||  params[:queryString].strip == ""
        render html: ('<ul><li>Nada encontrado.</li></ul>').html_safe
     else
         texto = "<ul id=\"ulSugest\">"
