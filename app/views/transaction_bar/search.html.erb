@@ -114,7 +114,7 @@
                              total_card += total_bar(inputs.id) 
                            end
                            %>
-                        <th style="text-align:right">Ordem #<%=inputs.id%></br><%="\t\t"%>Total: <%=number_to_currency(total_bar(inputs.id))%></br><%="\tt"%>Forma de pagamento: <%= t("activerecord.attributes.transaction.payment_methods.#{inputs.payment_method}") %></th>
+                        <th style="text-align:right">Ordem #<%=inputs.id%></br><%="\t\t"%>Total: <%=number_to_currency(total_bar(inputs.id))%></br><%="\t\t"%>Forma de pagamento: <%= t("activerecord.attributes.transaction.payment_methods.#{inputs.payment_method}") %></th>
                      </tr>
                    <% end %>
 
