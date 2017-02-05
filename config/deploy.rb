@@ -27,8 +27,7 @@ set :puma_workers, 0
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true
 set :puma_preload_app, false
-set :console_env, :production
-set :console_user, :rails # run rails console as appuser through sudo
+
 
 
 namespace :db do
