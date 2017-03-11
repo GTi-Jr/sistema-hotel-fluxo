@@ -80,6 +80,14 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: '138.197.19.102' }
 
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :deliver_with => :deliver_now,
+    :email_prefix => "[HOTEL PORTO] ",
+    :sender_address => %{"notifier" <exceptions@hotelportofuturo.com>},
+    :exception_recipients => %w{pixelzip0@gmail.com}
+  }
+
  
 
 end
