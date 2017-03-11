@@ -44,6 +44,7 @@ gem 'capistrano-rails-console', require: false
 
 gem 'rails_12factor', group: :production
 gem 'exception_notification'
+gem 'sendgrid'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
