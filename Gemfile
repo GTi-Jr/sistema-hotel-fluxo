@@ -68,4 +68,6 @@ group :development do
   gem 'capistrano-bundler'
 
   gem 'capistrano3-puma'
+  
+  gem 'capistrano-rails-console', require: false
 end
